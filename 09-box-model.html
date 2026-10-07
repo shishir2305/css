@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Box Model</title>
+
+    <style>
+        /*
+        ============================================================
+        CSS BOX MODEL
+        ============================================================
+
+        Every HTML element is treated as a rectangular box.
+
+        The box consists of:
+
+        1. Content
+        2. Padding
+        3. Border
+        4. Margin
+
+                Margin
+            ┌───────────────┐
+            │    Border     │
+            │  ┌─────────┐  │
+            │  │ Padding │  │
+            │  │ ┌─────┐ │  │
+            │  │ │     │ │  │
+            │  │ │Content│ │  │
+            │  │ └─────┘ │  │
+            │  └─────────┘  │
+            └───────────────┘
+        */
+
+
+        /*
+        ============================================================
+        1. CONTENT
+        ============================================================
+
+        width and height normally control the CONTENT area.
+
+        Here:
+            content width  = 300px
+            content height = 100px
+        */
+
+        .box {
+            width: 300px;
+            height: 100px;
+
+            /*
+            ========================================================
+            2. PADDING
+            ========================================================
+
+            Padding creates space INSIDE the element.
+
+            20px padding on all four sides means:
+
+                left   = 20px
+                right  = 20px
+                top    = 20px
+                bottom = 20px
+            */
+
+            padding: 20px;
+
+
+            /*
+            ========================================================
+            3. BORDER
+            ========================================================
+
+            Border surrounds the content + padding.
+
+            5px border on all four sides.
+            */
+
+            border: 5px solid black;
+
+
+            /*
+            ========================================================
+            4. MARGIN
+            ========================================================
+
+            Margin creates space OUTSIDE the element.
+
+            It separates this element from other elements.
+            */
+
+            margin: 30px;
+
+            background-color: lightblue;
+        }
+
+
+        /*
+        ============================================================
+        THE DEFAULT BOX MODEL: content-box
+        ============================================================
+
+        The default value of box-sizing is:
+
+            box-sizing: content-box;
+
+        Therefore, width applies ONLY to the content.
+
+        Example:
+
+            Content = 300px
+
+            Padding:
+                20px left + 20px right = 40px
+
+            Border:
+                5px left + 5px right = 10px
+
+            Actual total width:
+
+                300 + 40 + 10
+                = 350px
+
+        IMPORTANT:
+
+            margin is NOT included in the element's width.
+
+        If margin is also considered:
+
+            350px box + 30px left margin + 30px right margin
+            = 410px total space occupied
+        */
+
+
+        /*
+        ============================================================
+        box-sizing: border-box
+        ============================================================
+
+        border-box makes width and height include:
+
+            Content + Padding + Border
+
+        Example:
+
+            width: 300px;
+            padding: 20px;
+            border: 5px;
+
+        Total width remains:
+
+            300px
+
+        The browser reduces the content area to make room
+        for padding and border.
+        */
+
+        .border-box {
+            box-sizing: border-box;
+
+            width: 300px;
+            height: 100px;
+
+            padding: 20px;
+            border: 5px solid black;
+
+            margin: 30px;
+
+            background-color: lightgreen;
+        }
+
+
+        /*
+        ============================================================
+        GLOBAL BOX-SIZING RESET
+        ============================================================
+
+        This is very common in modern web development.
+
+        It makes every element use border-box.
+
+        This makes width/height easier and more predictable
+        when padding and borders are added.
+        */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+
+        /*
+        ============================================================
+        PADDING CAN HAVE DIFFERENT VALUES
+        ============================================================
+
+        One value:
+            padding: 20px;
+
+        Two values:
+            padding: 10px 20px;
+
+            top/bottom = 10px
+            left/right = 20px
+
+        Four values:
+            padding: 10px 20px 30px 40px;
+
+            top    = 10px
+            right  = 20px
+            bottom = 30px
+            left   = 40px
+        */
+
+
+        /*
+        ============================================================
+        MARGIN FOLLOWS THE SAME SHORTHAND PATTERN
+        ============================================================
+
+        margin: 20px;
+
+        margin: 10px 20px;
+
+        margin: 10px 20px 30px 40px;
+        */
+
+
+        .container {
+            border: 2px dashed gray;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Box Model</h1>
+
+    <div class="container">
+
+        <!--
+        This element demonstrates the traditional content-box model.
+
+        By default:
+
+            box-sizing: content-box
+
+        So width: 300px means the CONTENT is 300px wide.
+        -->
+
+        <div class="box">
+            Content Box
+        </div>
+
+
+        <!--
+        This element demonstrates border-box.
+
+        width: 300px includes:
+
+            Content + Padding + Border
+        -->
+
+        <div class="border-box">
+            Border Box
+        </div>
+
+    </div>
+
+
+    <!--
+    ================================================================
+    QUICK REVISION
+    ================================================================
+
+    CSS BOX MODEL:
+
+        Content
+           ↓
+        Padding
+           ↓
+        Border
+           ↓
+        Margin
+
+
+    CONTENT
+    -------
+    Actual text, image, or other content.
+
+
+    PADDING
+    -------
+    Space INSIDE the element.
+
+    Content ←→ Padding ←→ Border
+
+
+    BORDER
+    ------
+    Visible boundary around content + padding.
+
+
+    MARGIN
+    ------
+    Space OUTSIDE the element.
+
+    Element ←→ Margin ←→ Other element
+
+
+    ================================================================
+    DEFAULT BOX MODEL
+    ================================================================
+
+    box-sizing: content-box;
+
+    Declared width = content width
+
+    Total width:
+
+        width
+        + left padding
+        + right padding
+        + left border
+        + right border
+
+
+    ================================================================
+    BORDER-BOX
+    ================================================================
+
+    box-sizing: border-box;
+
+    Declared width includes:
+
+        Content + Padding + Border
+
+    This is generally easier to work with.
+
+
+    ================================================================
+    COMMON BEST PRACTICE
+    ================================================================
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+
+    ================================================================
+    INTERVIEW POINT
+    ================================================================
+
+    Q: Does margin contribute to an element's width?
+
+    A: No.
+
+    Margin is outside the element's box.
+
+    However, margin DOES consume space in the layout.
+
+
+    ================================================================
+    MENTAL MODEL
+    ================================================================
+
+        MARGIN
+          ↓
+        BORDER
+          ↓
+        PADDING
+          ↓
+        CONTENT
+
+    "Outside → Inside"
+
+        Margin → Border → Padding → Content
+    ================================================================
+    -->
+
+</body>
+</html>

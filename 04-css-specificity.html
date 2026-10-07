@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>CSS Specificity and Cascade</title>
+
+    <style>
+      /* =================================================
+       SPECIFICITY
+       =================================================
+
+       Specificity determines which selector wins
+       when multiple selectors target the same element.
+
+       Simplified order:
+
+       ID
+        ↓
+       Class / Attribute / Pseudo-class
+        ↓
+       Element / Pseudo-element
+        ↓
+       Universal
+    */
+
+      /* Element selector → LOW specificity */
+      p {
+        color: blue;
+      }
+
+      /* Class selector → HIGHER specificity */
+      .text {
+        color: green;
+      }
+
+      /* ID selector → HIGHER than class */
+      #message {
+        color: red;
+      }
+
+      /*
+      The paragraph below has:
+
+      p          → element
+      .text      → class
+      #message   → ID
+
+      Therefore #message wins.
+
+      Final color → RED
+    */
+
+      /* =================================================
+       CASCADE
+       =================================================
+
+       When selectors have the same specificity,
+       the declaration written later wins.
+    */
+
+      .box {
+        background: blue;
+      }
+
+      .box {
+        background: red;
+      }
+
+      /*
+      Both selectors have the same specificity.
+
+      The second rule comes later.
+
+      Therefore:
+
+      Final background → RED
+    */
+
+      /* =================================================
+       CASCADE WITH DIFFERENT SELECTORS
+       ================================================= */
+
+      .button {
+        color: blue;
+      }
+
+      .button {
+        color: green;
+      }
+
+      /*
+      Same selector
+      Same specificity
+      Same importance
+
+      Later declaration wins.
+
+      Final color → GREEN
+    */
+
+      /* =================================================
+       !important
+       =================================================
+
+       !important gives a declaration higher priority
+       than normal declarations.
+
+       It should generally be avoided unless there
+       is a specific reason to use it.
+    */
+
+      #important-text {
+        color: blue !important;
+      }
+
+      .important {
+        color: red;
+      }
+
+      /*
+      Even though .important is a class selector,
+      the !important declaration wins here.
+    */
+
+      /* =================================================
+       CASCADE LAYERS
+       =================================================
+
+       @layer allows CSS to be organized into
+       explicit cascade layers.
+
+       Layer ordering can control which layer wins.
+    */
+
+      @layer base, components;
+
+      @layer base {
+        .layer-example {
+          color: blue;
+        }
+      }
+
+      @layer components {
+        .layer-example {
+          color: red;
+        }
+      }
+
+      /*
+      components comes after base in the declared
+      layer order, so its normal declaration wins.
+    */
+    </style>
+  </head>
+
+  <body>
+    <!-- Specificity example -->
+    <p id="message" class="text">I will be RED because the ID selector wins.</p>
+
+    <!-- Cascade example -->
+    <div class="box">
+      My background will be RED because the later rule wins when specificity is
+      equal.
+    </div>
+
+    <!-- Same selector + source order -->
+    <p class="button">My color will be GREEN.</p>
+
+    <!-- !important example -->
+    <p id="important-text" class="important">
+      I will be BLUE because of !important.
+    </p>
+
+    <!-- Cascade layer example -->
+    <p class="layer-example">
+      I will be RED because the components layer wins.
+    </p>
+  </body>
+</html>
+
+<!-- Note -->
+<!-- When internal and external CSS have the **same specificity and priority**, the rule that appears **later in the document wins**. Therefore, if `<style>` comes before `<link>`, the external CSS wins; if `<link>` comes before `<style>`, the internal CSS wins. This is because of **source order in the CSS cascade**.
+ -->

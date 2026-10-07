@@ -1,0 +1,429 @@
+Below is a compact, study-friendly file covering the **most important CSS typography concepts**, with explanations directly in comments.
+
+**Filename:** `css-typography.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Typography</title>
+
+    <style>
+        /* =====================================================
+           1. FONT FAMILY
+           =====================================================
+
+           Defines which font should be used.
+
+           The browser tries fonts from left to right.
+           If the first isn't available, it uses the next one.
+        */
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        /* =====================================================
+           2. FONT SIZE
+           =====================================================
+
+           Controls the size of the text.
+
+           rem is commonly preferred for scalable typography.
+        */
+
+        .font-size {
+            font-size: 1.5rem;
+        }
+
+
+        /* =====================================================
+           3. FONT WEIGHT
+           =====================================================
+
+           Controls how thick the text appears.
+
+           Common values:
+           100 → Thin
+           400 → Normal
+           500 → Medium
+           600 → Semi-bold
+           700 → Bold
+           900 → Black
+        */
+
+        .font-weight {
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           4. FONT STYLE
+           ===================================================== */
+
+        .font-style {
+            font-style: italic;
+        }
+
+
+        /* =====================================================
+           5. LINE HEIGHT
+           =====================================================
+
+           Controls the vertical space between lines.
+
+           Unitless values are usually preferred because
+           they scale automatically with font-size.
+        */
+
+        .line-height {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           6. TEXT ALIGNMENT
+           ===================================================== */
+
+        .text-align {
+            text-align: center;
+        }
+
+
+        /* =====================================================
+           7. LETTER SPACING
+           =====================================================
+
+           Controls the space between individual characters.
+        */
+
+        .letter-spacing {
+            letter-spacing: 2px;
+        }
+
+
+        /* =====================================================
+           8. WORD SPACING
+           =====================================================
+
+           Controls the space between words.
+        */
+
+        .word-spacing {
+            word-spacing: 10px;
+        }
+
+
+        /* =====================================================
+           9. TEXT TRANSFORM
+           ===================================================== */
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .lowercase {
+            text-transform: lowercase;
+        }
+
+        .capitalize {
+            text-transform: capitalize;
+        }
+
+
+        /* =====================================================
+           10. TEXT DECORATION
+           ===================================================== */
+
+        .underline {
+            text-decoration: underline;
+        }
+
+        .line-through {
+            text-decoration: line-through;
+        }
+
+
+        /* =====================================================
+           11. TEXT INDENT
+           ===================================================== */
+
+        .indent {
+            text-indent: 40px;
+        }
+
+
+        /* =====================================================
+           12. TEXT SHADOW
+           ===================================================== */
+
+        .shadow {
+            text-shadow: 2px 2px 4px gray;
+        }
+
+
+        /* =====================================================
+           13. RESPONSIVE TYPOGRAPHY
+           =====================================================
+
+           clamp(min, preferred, max)
+
+           The font grows/shrinks with the viewport but
+           never becomes smaller than 2rem or larger than 4rem.
+        */
+
+        .responsive-heading {
+            font-size: clamp(2rem, 5vw, 4rem);
+        }
+
+
+        /* =====================================================
+           14. TEXT WRAPPING
+           =====================================================
+
+           Prevents long words/URLs from overflowing.
+        */
+
+        .wrapping {
+            overflow-wrap: break-word;
+        }
+
+
+        /* =====================================================
+           15. TEXT ELLIPSIS
+           =====================================================
+
+           Creates:
+
+           "This is a very long tex..."
+
+           Requires:
+           - nowrap
+           - overflow: hidden
+           - text-overflow: ellipsis
+        */
+
+        .ellipsis {
+            width: 250px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+        /* =====================================================
+           16. WEB FONTS
+           =====================================================
+
+           @font-face allows us to load a custom font.
+
+           WOFF2 is commonly used because it is optimized
+           for web delivery.
+
+           font-display: swap allows fallback text to appear
+           while the custom font is loading.
+        */
+
+        /*
+        @font-face {
+            font-family: "MyFont";
+            src: url("/fonts/my-font.woff2") format("woff2");
+            font-display: swap;
+        }
+
+        .custom-font {
+            font-family: "MyFont", sans-serif;
+        }
+        */
+
+
+        /* =====================================================
+           17. TYPOGRAPHY BEST PRACTICE
+           ===================================================== */
+
+        body {
+            /*
+                Unitless line-height makes text easier to scale.
+            */
+            line-height: 1.5;
+
+            /*
+                Improve readability by limiting extremely
+                long lines.
+            */
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        p {
+            /*
+                Around 45–75 characters per line is generally
+                comfortable for reading.
+            */
+            max-width: 70ch;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="responsive-heading">
+        CSS Typography
+    </h1>
+
+    <h2>Font Family</h2>
+    <p>
+        This text uses a font family with fallback fonts.
+    </p>
+
+    <h2>Font Size</h2>
+    <p class="font-size">
+        This text has a larger font size.
+    </p>
+
+    <h2>Font Weight</h2>
+    <p class="font-weight">
+        This text is bold.
+    </p>
+
+    <h2>Font Style</h2>
+    <p class="font-style">
+        This text is italic.
+    </p>
+
+    <h2>Line Height</h2>
+    <p class="line-height">
+        Line height controls the vertical space between lines.
+        Increasing line height generally improves readability
+        for paragraphs.
+    </p>
+
+    <h2>Text Alignment</h2>
+    <p class="text-align">
+        This text is centered.
+    </p>
+
+    <h2>Letter Spacing</h2>
+    <p class="letter-spacing">
+        Spaced Characters
+    </p>
+
+    <h2>Word Spacing</h2>
+    <p class="word-spacing">
+        Words have extra spacing.
+    </p>
+
+    <h2>Text Transform</h2>
+
+    <p class="uppercase">this becomes uppercase</p>
+    <p class="lowercase">THIS BECOMES LOWERCASE</p>
+    <p class="capitalize">this becomes capitalized</p>
+
+    <h2>Text Decoration</h2>
+
+    <p class="underline">Underlined text</p>
+    <p class="line-through">Deleted text</p>
+
+    <h2>Text Indent</h2>
+
+    <p class="indent">
+        This paragraph has indentation at the beginning.
+        Text indentation is mostly useful for paragraphs
+        and certain document-style layouts.
+    </p>
+
+    <h2>Text Shadow</h2>
+
+    <p class="shadow">
+        Text with shadow.
+    </p>
+
+    <h2>Text Ellipsis</h2>
+
+    <p class="ellipsis">
+        This is a very long text that will be truncated when
+        there is not enough horizontal space.
+    </p>
+
+    <h2>Responsive Typography</h2>
+
+    <p>
+        Resize the browser window and observe the heading.
+        Its size changes smoothly using clamp().
+    </p>
+
+
+    <!-- =====================================================
+         QUICK REVISION
+         =====================================================
+
+         font-family
+         → Controls the font.
+
+         font-size
+         → Controls text size.
+
+         font-weight
+         → Controls thickness.
+
+         font-style
+         → Normal / italic.
+
+         line-height
+         → Vertical spacing between lines.
+
+         text-align
+         → Horizontal alignment.
+
+         letter-spacing
+         → Space between characters.
+
+         word-spacing
+         → Space between words.
+
+         text-transform
+         → uppercase / lowercase / capitalize.
+
+         text-decoration
+         → underline / line-through / etc.
+
+         text-shadow
+         → Adds shadow behind text.
+
+         clamp()
+         → Useful for responsive font sizes.
+
+         overflow-wrap
+         → Prevents long words/URLs from overflowing.
+
+         text-overflow: ellipsis
+         → Shows "..." when text is truncated.
+
+         @font-face
+         → Loads custom web fonts.
+
+         font-display: swap
+         → Shows fallback text while custom font loads.
+
+         ch
+         → Useful for controlling readable text width.
+
+         IMPORTANT:
+         Good typography is not only about appearance.
+
+         It also affects:
+         → readability
+         → accessibility
+         → responsive design
+         → performance
+         → layout stability
+    -->
+
+</body>
+</html>
+```

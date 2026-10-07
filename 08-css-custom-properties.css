@@ -1,0 +1,13 @@
+:root {
+  --color-primary: #2563eb;
+  --color-text: #111827;
+  --space-md: 1rem;
+  --radius-card: 0.75rem;
+}
+
+.card {
+  color: var(--color-text);
+  padding: var(--space-md);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-primary);
+}

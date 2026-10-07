@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CSS Inheritance</title>
+
+  <style>
+
+    /* Parent element */
+    .parent {
+      color: blue;
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1.5;
+    }
+
+    /* The child does not define these properties,
+       so it inherits them from .parent. */
+    .child {
+      border: 2px solid black;
+      padding: 10px;
+    }
+
+    /* This child overrides the inherited color. */
+    .override {
+      color: red;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="parent">
+
+    Parent text
+
+    <!--
+      This paragraph inherits:
+      - color: blue
+      - font-family: Arial
+      - font-size: 20px
+      - line-height: 1.5
+    -->
+    <p class="child">
+      I inherit styles from my parent.
+    </p>
+
+    <!--
+      This paragraph inherits the other properties,
+      but overrides the parent's color.
+    -->
+    <p class="child override">
+      I inherit some styles but override the color.
+    </p>
+
+  </div>
+
+
+  <!-- =====================================================
+       COMMON INHERITED PROPERTIES
+
+       These commonly inherit from the parent:
+
+       - color
+       - font-family
+       - font-size
+       - font-style
+       - font-weight
+       - line-height
+       - text-align
+       - letter-spacing
+       - word-spacing
+       - visibility
+
+       Properties such as margin, padding, border, width,
+       height, and background generally do NOT inherit
+       by default.
+
+       CSS keywords related to inheritance:
+
+       inherit  → explicitly use the parent's value
+       initial  → use the property's initial value
+       unset    → inherit if the property is inheritable,
+                  otherwise use its initial value
+       revert   → revert to the previous cascade behavior
+  ===================================================== -->
+
+</body>
+</html>

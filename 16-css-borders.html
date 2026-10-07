@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Borders & Shadows</title>
+
+    <style>
+
+        /* =====================================================
+           1. BASIC BORDER
+           =====================================================
+
+           A border has three main parts:
+
+           border-width
+           border-style
+           border-color
+        */
+
+        .basic-border {
+            border: 2px solid black;
+            padding: 20px;
+        }
+
+
+        /* =====================================================
+           2. BORDER STYLES
+           ===================================================== */
+
+        .border-styles {
+            border: 3px dashed black;
+            padding: 20px;
+        }
+
+        /*
+            Common border styles:
+
+            solid
+            dashed
+            dotted
+            double
+            groove
+            ridge
+            inset
+            outset
+            none
+        */
+
+
+        /* =====================================================
+           3. BORDER WIDTH
+           ===================================================== */
+
+        .border-width {
+            border-style: solid;
+
+            /*
+                Different width on each side:
+
+                top
+                right
+                bottom
+                left
+            */
+            border-width: 5px 10px 15px 20px;
+        }
+
+
+        /* =====================================================
+           4. BORDER COLOR
+           ===================================================== */
+
+        .border-color {
+            border-style: solid;
+
+            /*
+                Colors can also be different on each side.
+            */
+            border-color: red blue green orange;
+        }
+
+
+        /* =====================================================
+           5. INDIVIDUAL BORDERS
+           ===================================================== */
+
+        .individual-borders {
+            border-top: 4px solid red;
+            border-right: 4px solid blue;
+            border-bottom: 4px solid green;
+            border-left: 4px solid orange;
+
+            padding: 20px;
+        }
+
+
+        /* =====================================================
+           6. BORDER RADIUS
+           =====================================================
+
+           Rounds the corners of an element.
+        */
+
+        .rounded {
+            border: 2px solid black;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+
+        /* Circle */
+
+        .circle {
+            width: 120px;
+            height: 120px;
+
+            border: 3px solid black;
+            border-radius: 50%;
+        }
+
+
+        /* =====================================================
+           7. OUTLINE
+           =====================================================
+
+           Outline is different from border.
+
+           Border:
+           → Part of the box model.
+
+           Outline:
+           → Drawn outside the border.
+           → Does not normally take up layout space.
+        */
+
+        .outline {
+            border: 2px solid black;
+            outline: 3px dashed red;
+            padding: 20px;
+        }
+
+
+        /* =====================================================
+           8. FOCUS OUTLINE
+           =====================================================
+
+           Focus indicators are important for keyboard
+           accessibility.
+
+           Avoid removing outlines without providing
+           an accessible replacement.
+        */
+
+        .input:focus {
+            outline: 3px solid blue;
+            border-color: blue;
+        }
+
+
+        /* =====================================================
+           9. BOX SHADOW
+           =====================================================
+
+           Syntax:
+
+           box-shadow:
+               x-offset
+               y-offset
+               blur
+               spread
+               color;
+        */
+
+        .basic-shadow {
+            padding: 30px;
+            background: white;
+
+            box-shadow:
+                5px 5px 10px gray;
+        }
+
+
+        /* =====================================================
+           10. SOFT SHADOW
+           =====================================================
+
+           Larger blur + lower opacity gives a softer shadow.
+        */
+
+        .soft-shadow {
+            padding: 30px;
+            background: white;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+
+        /* =====================================================
+           11. NEGATIVE SHADOW OFFSET
+           =====================================================
+
+           Negative values move the shadow
+           toward the opposite direction.
+        */
+
+        .negative-shadow {
+            padding: 30px;
+            background: white;
+
+            box-shadow:
+                -5px -5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* =====================================================
+           12. SPREAD
+           =====================================================
+
+           Spread controls how much the shadow expands
+           before blur is applied.
+        */
+
+        .spread-shadow {
+            padding: 30px;
+            background: white;
+
+            box-shadow:
+                0 5px 10px 5px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* =====================================================
+           13. INSET SHADOW
+           =====================================================
+
+           inset makes the shadow appear inside the element.
+        */
+
+        .inset-shadow {
+            padding: 30px;
+            background: white;
+
+            box-shadow:
+                inset 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* =====================================================
+           14. MULTIPLE SHADOWS
+           =====================================================
+
+           Multiple shadows are separated by commas.
+        */
+
+        .multiple-shadows {
+            padding: 30px;
+            background: white;
+
+            box-shadow:
+                0 5px 10px rgba(0, 0, 0, 0.2),
+                0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+
+        /* =====================================================
+           15. TEXT SHADOW
+           =====================================================
+
+           text-shadow applies a shadow to text,
+           not the element's box.
+        */
+
+        .text-shadow {
+            font-size: 30px;
+
+            text-shadow:
+                2px 2px 5px gray;
+        }
+
+
+        /* =====================================================
+           16. BORDER + SHADOW CARD
+           ===================================================== */
+
+        .card {
+            padding: 25px;
+            background: white;
+
+            border: 1px solid #ddd;
+            border-radius: 12px;
+
+            box-shadow:
+                0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+
+        /* =====================================================
+           17. PERFORMANCE
+           =====================================================
+
+           Shadows can be expensive when heavily used,
+           especially large/blurred shadows across many elements.
+
+           Avoid applying huge shadows to hundreds/thousands
+           of elements unnecessarily.
+
+           Also avoid unnecessary animated box-shadow.
+
+           For many animations, transform/opacity are generally
+           better choices for performance.
+        */
+
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Borders & Shadows</h1>
+
+
+    <h2>1. Basic Border</h2>
+
+    <div class="basic-border">
+        Basic border.
+    </div>
+
+
+    <h2>2. Border Style</h2>
+
+    <div class="border-styles">
+        Dashed border.
+    </div>
+
+
+    <h2>3. Border Width</h2>
+
+    <div class="border-width">
+        Different border widths on each side.
+    </div>
+
+
+    <h2>4. Border Color</h2>
+
+    <div class="border-color">
+        Different border colors on each side.
+    </div>
+
+
+    <h2>5. Individual Borders</h2>
+
+    <div class="individual-borders">
+        Each side has its own border.
+    </div>
+
+
+    <h2>6. Border Radius</h2>
+
+    <div class="rounded">
+        Rounded corners.
+    </div>
+
+
+    <h2>7. Circle</h2>
+
+    <div class="circle"></div>
+
+
+    <h2>8. Border vs Outline</h2>
+
+    <div class="outline">
+        Border and outline are different.
+    </div>
+
+
+    <h2>9. Focus Outline</h2>
+
+    <input
+        class="input"
+        type="text"
+        placeholder="Click or tab into me"
+    >
+
+
+    <h2>10. Basic Box Shadow</h2>
+
+    <div class="basic-shadow">
+        Basic shadow.
+    </div>
+
+
+    <h2>11. Soft Shadow</h2>
+
+    <div class="soft-shadow">
+        Soft shadow.
+    </div>
+
+
+    <h2>12. Negative Shadow</h2>
+
+    <div class="negative-shadow">
+        Shadow moved upward and left.
+    </div>
+
+
+    <h2>13. Spread</h2>
+
+    <div class="spread-shadow">
+        Shadow with spread.
+    </div>
+
+
+    <h2>14. Inset Shadow</h2>
+
+    <div class="inset-shadow">
+        Shadow inside the element.
+    </div>
+
+
+    <h2>15. Multiple Shadows</h2>
+
+    <div class="multiple-shadows">
+        Multiple shadows.
+    </div>
+
+
+    <h2>16. Text Shadow</h2>
+
+    <p class="text-shadow">
+        CSS Text Shadow
+    </p>
+
+
+    <h2>17. Real-World Card</h2>
+
+    <div class="card">
+        <h3>Product Card</h3>
+
+        <p>
+            Borders provide structure while shadows provide
+            visual depth.
+        </p>
+    </div>
+
+
+    <!-- =====================================================
+         QUICK REVISION
+         =====================================================
+
+         BORDER
+         ------
+
+         border:
+             width style color;
+
+
+         Example:
+
+             border: 2px solid black;
+
+
+         Common styles:
+
+             solid
+             dashed
+             dotted
+             double
+             none
+
+
+         BORDER RADIUS
+         -------------
+
+             border-radius: 10px;
+
+         50% can be used to create circles when the
+         element has equal width and height.
+
+
+         OUTLINE
+         -------
+
+         Border:
+             → Part of the box model.
+             → Takes up space.
+
+         Outline:
+             → Drawn outside the border.
+             → Does not normally affect layout.
+
+
+         BOX SHADOW
+         ----------
+
+         box-shadow:
+
+             x-offset
+             y-offset
+             blur
+             spread
+             color;
+
+
+         Example:
+
+             box-shadow:
+                 0 10px 30px
+                 rgba(0, 0, 0, 0.15);
+
+
+         INSET
+
+             box-shadow:
+                 inset 0 0 10px gray;
+
+
+         MULTIPLE SHADOWS
+
+             box-shadow:
+                 shadow1,
+                 shadow2;
+
+
+         TEXT SHADOW
+
+             text-shadow:
+                 2px 2px 5px gray;
+
+
+         ACCESSIBILITY
+         -------------
+
+         Do NOT remove focus outlines blindly.
+
+         Keyboard users need a visible focus indicator.
+
+
+         PERFORMANCE
+         -----------
+
+         Large/blurred shadows can be expensive,
+         especially when used on many elements.
+
+         Avoid unnecessary box-shadow animations.
+
+         Prefer transform/opacity for many UI animations.
+
+    -->
+
+</body>
+</html>

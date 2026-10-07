@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Transitions</title>
+
+    <style>
+
+        /* =====================================================
+           1. BASIC TRANSITION
+           =====================================================
+
+           transition makes a property change smoothly
+           instead of changing instantly.
+
+           Syntax:
+
+           transition:
+               property
+               duration
+               timing-function
+               delay;
+        */
+
+        .basic {
+            width: 150px;
+            height: 100px;
+            background: steelblue;
+
+            /*
+                When width/background changes,
+                animate the change for 0.5 seconds.
+            */
+            transition: width 0.5s;
+        }
+
+        .basic:hover {
+            width: 300px;
+        }
+
+
+        /* =====================================================
+           2. TRANSITION DURATION
+           =====================================================
+
+           Controls how long the transition takes.
+        */
+
+        .duration {
+            width: 150px;
+            height: 100px;
+            background: orange;
+
+            transition: width 2s;
+        }
+
+        .duration:hover {
+            width: 300px;
+        }
+
+
+        /* =====================================================
+           3. MULTIPLE PROPERTIES
+           =====================================================
+
+           Multiple properties can be transitioned.
+
+           Avoid unnecessarily using "all".
+           Explicit properties are easier to control.
+        */
+
+        .multiple {
+            width: 150px;
+            height: 100px;
+            background: steelblue;
+
+            transition:
+                width 0.5s,
+                background-color 0.5s,
+                border-radius 0.5s;
+        }
+
+        .multiple:hover {
+            width: 250px;
+            background-color: tomato;
+            border-radius: 30px;
+        }
+
+
+        /* =====================================================
+           4. TIMING FUNCTIONS
+           =====================================================
+
+           Controls the speed curve of the transition.
+
+           ease
+           ease-in
+           ease-out
+           ease-in-out
+           linear
+        */
+
+        .timing {
+            width: 150px;
+            height: 100px;
+            background: purple;
+
+            transition:
+                transform 1s ease-out;
+        }
+
+        .timing:hover {
+            transform: translateX(200px);
+        }
+
+
+        /* =====================================================
+           5. CUBIC-BEZIER
+           =====================================================
+
+           Allows custom timing curves.
+
+           cubic-bezier() gives more control over
+           acceleration/deceleration.
+        */
+
+        .custom-timing {
+            width: 150px;
+            height: 100px;
+            background: green;
+
+            transition:
+                transform 0.8s
+                cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .custom-timing:hover {
+            transform: translateX(200px);
+        }
+
+
+        /* =====================================================
+           6. TRANSITION DELAY
+           =====================================================
+
+           Delays the beginning of the transition.
+        */
+
+        .delay {
+            width: 150px;
+            height: 100px;
+            background: crimson;
+
+            transition:
+                transform 0.5s ease
+                0.3s;
+        }
+
+        .delay:hover {
+            transform: translateX(200px);
+        }
+
+
+        /* =====================================================
+           7. TRANSITION SHORTHAND
+           =====================================================
+
+           Full syntax:
+
+           transition:
+               property
+               duration
+               timing-function
+               delay;
+
+           Example:
+        */
+
+        .shorthand {
+            background: teal;
+
+            transition:
+                transform 0.3s ease-in-out 0.1s;
+        }
+
+        .shorthand:hover {
+            transform: scale(1.2);
+        }
+
+
+        /* =====================================================
+           8. BUTTON EXAMPLE
+           ===================================================== */
+
+        .button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+
+            background: #222;
+            color: white;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                background-color 0.2s ease;
+        }
+
+        .button:hover {
+            background: #444;
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           9. PERFORMANCE
+           =====================================================
+
+           For smooth animations, prefer properties such as:
+
+               transform
+               opacity
+
+           These can often be handled efficiently by the
+           browser's compositing pipeline.
+
+           Avoid frequently animating expensive layout
+           properties such as:
+
+               width
+               height
+               top
+               left
+
+           when transform can achieve the same visual effect.
+        */
+
+        .performance {
+            width: 150px;
+            height: 100px;
+            background: dodgerblue;
+
+            transition: transform 0.3s ease;
+        }
+
+        .performance:hover {
+            transform: translateX(100px);
+        }
+
+
+        /* =====================================================
+           10. REDUCED MOTION
+           =====================================================
+
+           Respect users who prefer reduced motion.
+
+           This is important for accessibility.
+        */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Transitions</h1>
+
+
+    <h2>1. Basic Transition</h2>
+
+    <div class="basic">
+        Hover me
+    </div>
+
+
+    <h2>2. Duration</h2>
+
+    <div class="duration">
+        Hover me
+    </div>
+
+
+    <h2>3. Multiple Properties</h2>
+
+    <div class="multiple">
+        Hover me
+    </div>
+
+
+    <h2>4. Timing Function</h2>
+
+    <div class="timing">
+        Hover me
+    </div>
+
+
+    <h2>5. Custom Timing</h2>
+
+    <div class="custom-timing">
+        Hover me
+    </div>
+
+
+    <h2>6. Delay</h2>
+
+    <div class="delay">
+        Hover me
+    </div>
+
+
+    <h2>7. Shorthand</h2>
+
+    <div class="shorthand">
+        Hover me
+    </div>
+
+
+    <h2>8. Real-World Button</h2>
+
+    <button class="button">
+        Hover me
+    </button>
+
+
+    <h2>9. Performance-Friendly Animation</h2>
+
+    <div class="performance">
+        Hover me
+    </div>
+
+
+    <!-- =====================================================
+         QUICK REVISION
+         =====================================================
+
+         TRANSITION
+         ----------
+
+         Makes CSS property changes happen smoothly.
+
+         Syntax:
+
+             transition:
+                 property
+                 duration
+                 timing-function
+                 delay;
+
+
+         Example:
+
+             transition:
+                 transform 0.3s ease;
+
+
+         DURATION
+         --------
+
+             transition-duration: 0.5s;
+
+
+         TIMING FUNCTION
+         ---------------
+
+             ease
+             ease-in
+             ease-out
+             ease-in-out
+             linear
+             cubic-bezier()
+
+
+         DELAY
+         -----
+
+             transition-delay: 0.2s;
+
+
+         MULTIPLE PROPERTIES
+         --------------------
+
+             transition:
+                 transform 0.3s,
+                 opacity 0.3s;
+
+
+         IMPORTANT:
+         Avoid "transition: all" when possible.
+
+         Explicitly specify the properties you want
+         to animate.
+
+
+         TRANSITION vs ANIMATION
+         -----------------------
+
+         Transition:
+             → Usually triggered by a state change.
+             → Example: :hover, :focus, class change.
+             → No keyframes required.
+
+         Animation:
+             → Can run automatically.
+             → Supports multiple stages using @keyframes.
+             → Can loop and have more complex sequences.
+
+
+         PERFORMANCE
+         -----------
+
+         Prefer:
+
+             transform
+             opacity
+
+         for smooth UI animations.
+
+         Avoid unnecessarily animating:
+
+             width
+             height
+             top
+             left
+
+
+         ACCESSIBILITY
+         --------------
+
+         Respect:
+
+             prefers-reduced-motion: reduce
+
+
+         KEY INTERVIEW POINT
+         -------------------
+
+         "Transitions interpolate between the old and new
+         values of a CSS property when the property's value
+         changes."
+    -->
+
+</body>
+</html>

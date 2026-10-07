@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!--
+        Makes the page responsive on mobile devices.
+
+        Without this, mobile browsers may render the page using
+        a wider virtual viewport, making responsive CSS behave unexpectedly.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Media Queries & Breakpoints</title>
+
+    <style>
+        /* =========================================================
+           1. BASE STYLES
+           =========================================================
+
+           We are using a MOBILE-FIRST approach.
+
+           Base CSS = styles for smaller screens.
+
+           Then we progressively enhance the layout using
+           @media (min-width: ...).
+
+           IMPORTANT:
+           Do NOT think:
+
+               768px = tablet
+               1024px = laptop
+               1440px = desktop
+
+           These are only common values.
+
+           A breakpoint should be selected based on when
+           YOUR layout needs to change.
+        */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #222;
+        }
+
+        .container {
+            /*
+                Fluid width.
+
+                The container takes available space but leaves
+                20px on each side.
+
+                min() means:
+
+                Use the smaller of:
+                100% - 40px
+                1100px
+            */
+            width: min(1100px, calc(100% - 40px));
+            margin-inline: auto;
+        }
+
+        /* =========================================================
+           HEADER
+           ========================================================= */
+
+        header {
+            background: #111;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .navbar {
+            /*
+                MOBILE:
+                Navigation items are stacked vertically.
+            */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* =========================================================
+           MAIN CONTENT
+           ========================================================= */
+
+        main {
+            padding: 40px 0;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            /*
+                clamp():
+
+                Minimum = 28px
+                Preferred = 5vw
+                Maximum = 56px
+
+                So the heading scales smoothly instead of
+                jumping at breakpoints.
+            */
+            font-size: clamp(28px, 5vw, 56px);
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           CARDS
+           ========================================================= */
+
+        .cards {
+            /*
+                MOBILE:
+
+                One card per row.
+            */
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        /* =========================================================
+           BREAKPOINT #1
+           =========================================================
+
+           At 600px and above:
+
+           The layout changes from one card per row
+           to two cards per row.
+
+           Notice that we are NOT saying:
+
+               600px = tablet
+
+           We simply decided that our cards need more
+           horizontal space at this point.
+        */
+
+        @media (min-width: 600px) {
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* =========================================================
+           BREAKPOINT #2
+           =========================================================
+
+           At 900px and above:
+
+           Navigation becomes horizontal.
+           Cards become three columns.
+        */
+
+        @media (min-width: 900px) {
+
+            .navbar {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .nav-links {
+                flex-direction: row;
+                gap: 25px;
+            }
+
+            .cards {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+
+        /* =========================================================
+           2. MAX-WIDTH MEDIA QUERY
+           =========================================================
+
+           max-width means:
+
+               "Apply these styles when the viewport
+                is this width or smaller."
+
+           Here we make the hero text smaller on smaller screens.
+        */
+
+        @media (max-width: 500px) {
+
+            .hero p {
+                font-size: 14px;
+            }
+        }
+
+
+        /* =========================================================
+           3. RANGE MEDIA QUERY
+           =========================================================
+
+           We can combine conditions.
+
+           This applies only when:
+
+               width >= 600px
+               AND
+               width <= 899px
+
+           Useful when you need a specific intermediate layout.
+        */
+
+        @media (min-width: 600px) and (max-width: 899px) {
+
+            .hero {
+                max-width: 700px;
+                margin-inline: auto;
+                margin-bottom: 40px;
+            }
+        }
+
+
+        /* =========================================================
+           4. ORIENTATION
+           =========================================================
+
+           CSS can react to the device orientation.
+
+           landscape = wider than it is tall
+           portrait  = taller than it is wide
+        */
+
+        @media (orientation: landscape) {
+
+            .hero {
+                padding: 20px 0;
+            }
+        }
+
+
+        /* =========================================================
+           5. DARK MODE
+           =========================================================
+
+           prefers-color-scheme detects the user's
+           operating-system/browser color preference.
+
+           If the user prefers dark mode, these styles apply.
+        */
+
+        @media (prefers-color-scheme: dark) {
+
+            body {
+                background: #111;
+                color: #eee;
+            }
+
+            .card {
+                background: #222;
+            }
+
+            .hero p {
+                color: #aaa;
+            }
+        }
+
+
+        /* =========================================================
+           6. REDUCED MOTION
+           =========================================================
+
+           Some users enable "Reduce Motion" because animations
+           can cause discomfort or accessibility problems.
+
+           We should respect that preference.
+        */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+
+        /* =========================================================
+           7. HOVER + POINTER
+           =========================================================
+
+           Not every device has a precise mouse pointer.
+
+           hover: hover
+               → Device supports meaningful hover.
+
+           pointer: fine
+               → Device has a precise pointer such as a mouse.
+        */
+
+        @media (hover: hover) and (pointer: fine) {
+
+            .card {
+                transition: transform 0.2s ease;
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+            }
+        }
+
+
+        /* =========================================================
+           8. CONTAINER QUERIES
+           =========================================================
+
+           IMPORTANT DIFFERENCE:
+
+           Media Query:
+               Looks at the viewport.
+
+           Container Query:
+               Looks at the size of a component's container.
+
+           This is extremely useful for reusable components.
+        */
+
+        .component-wrapper {
+            /*
+                This element becomes a query container.
+            */
+            container-type: inline-size;
+
+            margin-top: 40px;
+        }
+
+        .component {
+            background: #ddd;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /*
+            When the COMPONENT'S CONTAINER reaches 500px,
+
+            change the component layout.
+
+            Notice:
+
+                @container
+
+            instead of:
+
+                @media
+        */
+
+        @container (min-width: 500px) {
+
+            .component {
+                display: flex;
+                gap: 20px;
+                align-items: center;
+            }
+        }
+
+
+        /* =========================================================
+           9. PRINT MEDIA QUERY
+           =========================================================
+
+           Media queries can target different media types.
+
+           print is useful when users print a webpage.
+        */
+
+        @media print {
+
+            header {
+                display: none;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================================
+         HEADER
+         ========================================================= -->
+
+    <header>
+
+        <div class="container">
+
+            <nav class="navbar">
+
+                <div class="logo">
+                    My Website
+                </div>
+
+                <div class="nav-links">
+                    <a href="#">Home</a>
+                    <a href="#">Products</a>
+                    <a href="#">About</a>
+                    <a href="#">Contact</a>
+                </div>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         MAIN
+         ========================================================= -->
+
+    <main>
+
+        <div class="container">
+
+            <section class="hero">
+
+                <h1>
+                    Media Queries & Breakpoints
+                </h1>
+
+                <p>
+                    Resize your browser window and observe how
+                    the layout changes at different widths.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 RESPONSIVE CARDS
+                 =================================================
+
+                 Mobile:
+                     1 column
+
+                 600px+:
+                     2 columns
+
+                 900px+:
+                     3 columns
+            -->
+
+            <section class="cards">
+
+                <article class="card">
+                    <h2>Mobile</h2>
+
+                    <p>
+                        The base CSS is designed for smaller
+                        screens first.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h2>Tablet</h2>
+
+                    <p>
+                        At 600px, the cards change to two columns.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h2>Desktop</h2>
+
+                    <p>
+                        At 900px, the cards become three columns
+                        and the navigation becomes horizontal.
+                    </p>
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 CONTAINER QUERY DEMO
+                 ================================================= -->
+
+            <section class="component-wrapper">
+
+                <div class="component">
+
+                    <div>
+                        <h2>Container Query</h2>
+
+                        <p>
+                            This component responds to the width
+                            of its container rather than directly
+                            responding to the viewport width.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================================================
+         QUICK REVISION
+         =========================================================
+
+         MEDIA QUERIES
+         -------------
+         Media queries allow CSS to respond to conditions such
+         as viewport width, orientation, color scheme, pointer,
+         hover capability, and user accessibility preferences.
+
+         Basic syntax:
+
+             @media (condition) {
+                 CSS
+             }
+
+
+         MIN-WIDTH
+         ----------
+         Applies styles at the specified width and above.
+
+             @media (min-width: 768px) {
+                 ...
+             }
+
+
+         MAX-WIDTH
+         ---------
+         Applies styles at the specified width and below.
+
+             @media (max-width: 768px) {
+                 ...
+             }
+
+
+         BREAKPOINT
+         ----------
+         A point where the layout needs to change.
+
+         IMPORTANT:
+
+         Do NOT blindly memorize:
+
+             768 = tablet
+             1024 = desktop
+
+         Choose breakpoints based on where your layout
+         actually needs to change.
+
+
+         MOBILE-FIRST
+         ------------
+         Start with styles for smaller screens.
+
+         Then progressively enhance:
+
+             Base CSS
+                 ↓
+             @media (min-width: ...)
+                 ↓
+             Larger layout
+
+
+         FLUID RESPONSIVE DESIGN
+         -----------------------
+         Prefer fluid CSS before adding many breakpoints.
+
+         Useful tools:
+
+             %
+             rem
+             vw / vh
+             min()
+             max()
+             clamp()
+             Flexbox
+             Grid
+
+
+         MEDIA QUERY vs CONTAINER QUERY
+         ------------------------------
+
+         Media Query:
+             Responds to the viewport/environment.
+
+             @media (min-width: 768px) {}
+
+
+         Container Query:
+             Responds to the size of a component's container.
+
+             @container (min-width: 500px) {}
+
+
+         OTHER IMPORTANT MEDIA FEATURES
+         --------------------------------
+
+         Orientation:
+
+             @media (orientation: landscape)
+
+
+         Dark mode:
+
+             @media (prefers-color-scheme: dark)
+
+
+         Reduced motion:
+
+             @media (prefers-reduced-motion: reduce)
+
+
+         Hover/pointer:
+
+             @media (hover: hover)
+             @media (pointer: fine)
+
+
+         Print:
+
+             @media print
+
+
+         MAANG INTERVIEW POINT
+         ---------------------
+
+         "A breakpoint should be chosen based on the point
+         where the layout needs to change, rather than blindly
+         targeting specific device sizes."
+
+
+         BEST MENTAL MODEL
+         -----------------
+
+         Media Query
+             =
+         "How much space/environment does the viewport have?"
+
+
+         Container Query
+             =
+         "How much space does THIS COMPONENT have?"
+
+
+         RESPONSIVE CSS MENTAL MODEL
+         ----------------------------
+
+             Fluid layout
+                    ↓
+             Flexbox / Grid
+                    ↓
+             Relative units
+                    ↓
+             min() / max() / clamp()
+                    ↓
+             Media queries when necessary
+                    ↓
+             Container queries for reusable components
+
+    -->
+
+</body>
+</html>

@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Grid</title>
+
+    <style>
+
+        /*
+        ============================================================
+        CSS GRID
+        ============================================================
+
+        CSS Grid is a TWO-DIMENSIONAL layout system.
+
+        It allows us to control:
+
+            → ROWS
+            → COLUMNS
+
+        Think of it like a spreadsheet:
+
+                Column 1    Column 2    Column 3
+              ┌──────────┬──────────┬──────────┐
+        Row 1 │    1     │    2     │    3     │
+              ├──────────┼──────────┼──────────┤
+        Row 2 │    4     │    5     │    6     │
+              └──────────┴──────────┴──────────┘
+
+
+        FLEXBOX vs GRID
+
+        Flexbox:
+            One-dimensional
+            → Row OR Column
+
+        Grid:
+            Two-dimensional
+            → Rows AND Columns
+
+
+        ============================================================
+        GRID CONTAINER AND GRID ITEMS
+        ============================================================
+
+        Parent:
+
+            display: grid;
+
+        becomes the GRID CONTAINER.
+
+        Its DIRECT CHILDREN become GRID ITEMS.
+        */
+
+
+        /*
+        ============================================================
+        1. BASIC GRID
+        ============================================================
+
+        grid-template-columns defines the columns.
+
+            1fr 1fr 1fr
+
+        means:
+
+            Column 1 = 1 fraction
+            Column 2 = 1 fraction
+            Column 3 = 1 fraction
+
+        Therefore, the available space is divided equally.
+        */
+
+        .basic-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr 1fr;
+
+            gap: 10px;
+
+            padding: 10px;
+
+            border: 3px solid black;
+        }
+
+        .item {
+            padding: 30px;
+
+            text-align: center;
+
+            background: lightblue;
+
+            border: 1px solid black;
+        }
+
+
+        /*
+        ============================================================
+        2. grid-template-columns
+        ============================================================
+
+        We can define different column sizes.
+
+            200px 1fr 2fr
+
+        means:
+
+            Column 1 → 200px
+            Column 2 → 1 fraction
+            Column 3 → 2 fractions
+
+        The remaining available space is divided:
+
+            1 : 2
+        */
+
+        .different-columns {
+            display: grid;
+
+            grid-template-columns: 200px 1fr 2fr;
+
+            gap: 10px;
+
+            border: 3px solid black;
+        }
+
+
+        /*
+        ============================================================
+        3. grid-template-rows
+        ============================================================
+
+        Defines the size of rows.
+
+            100px 200px
+
+        means:
+
+            Row 1 = 100px
+            Row 2 = 200px
+        */
+
+        .rows-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            grid-template-rows: 100px 200px;
+
+            gap: 10px;
+
+            border: 3px solid black;
+        }
+
+
+        /*
+        ============================================================
+        4. THE fr UNIT
+        ============================================================
+
+        fr = fraction of the available space.
+
+        Example:
+
+            grid-template-columns: 1fr 2fr;
+
+        Total:
+
+            1 + 2 = 3 fractions
+
+        First column:
+
+            1/3 of available space
+
+        Second column:
+
+            2/3 of available space
+
+
+        This is one of the most important Grid concepts.
+        */
+
+
+        /*
+        ============================================================
+        5. REPEAT()
+        ============================================================
+
+        Instead of writing:
+
+            1fr 1fr 1fr 1fr
+
+        we can write:
+
+            repeat(4, 1fr)
+
+        This creates four equal columns.
+        */
+
+        .repeat-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 10px;
+
+            border: 3px solid black;
+        }
+
+
+        /*
+        ============================================================
+        6. GAP
+        ============================================================
+
+        gap creates space between:
+
+            → rows
+            → columns
+
+        Example:
+
+            gap: 20px;
+
+        creates 20px between grid items.
+        */
+
+        .gap-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+
+            border: 3px solid black;
+        }
+
+
+        /*
+        We can also control row and column gaps separately:
+
+            row-gap: 20px;
+            column-gap: 10px;
+        */
+
+
+        /*
+        ============================================================
+        7. GRID ITEM SPANNING
+        ============================================================
+
+        A grid item can occupy MULTIPLE columns.
+
+            grid-column: 1 / 3;
+
+        means:
+
+            Start at column line 1
+            End at column line 3
+
+        Therefore, it occupies:
+
+            Column 1 + Column 2
+        */
+
+        .span-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 10px;
+
+            border: 3px solid black;
+        }
+
+        .span-two-columns {
+            grid-column: 1 / 3;
+        }
+
+
+        /*
+        ============================================================
+        8. span KEYWORD
+        ============================================================
+
+        Instead of:
+
+            grid-column: 1 / 3;
+
+        we can write:
+
+            grid-column: span 2;
+
+        This means:
+
+            "Occupy 2 columns."
+        */
+
+        .span-keyword {
+            grid-column: span 2;
+        }
+
+
+        /*
+        ============================================================
+        9. GRID ROW SPANNING
+        ============================================================
+
+        Similar to columns, an item can span multiple rows.
+
+            grid-row: 1 / 3;
+
+        means:
+
+            Start at row line 1
+            End at row line 3
+
+        Therefore, it occupies two rows.
+        */
+
+        .row-span-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr 1fr;
+
+            grid-template-rows: 100px 100px;
+
+            gap: 10px;
+
+            border: 3px solid black;
+        }
+
+        .span-two-rows {
+            grid-row: 1 / 3;
+        }
+
+
+        /*
+        ============================================================
+        10. minmax()
+        ============================================================
+
+        minmax(min, max)
+
+        defines a minimum and maximum size.
+
+            minmax(200px, 1fr)
+
+        means:
+
+            Minimum = 200px
+            Maximum = 1fr
+
+
+        This is extremely useful for responsive layouts.
+        */
+
+
+        /*
+        ============================================================
+        11. AUTO-FIT
+        ============================================================
+
+        auto-fit allows Grid to automatically determine how many
+        columns can fit.
+
+            repeat(auto-fit, minmax(200px, 1fr))
+
+        Meaning:
+
+            Create as many columns as possible.
+
+        Each column:
+
+            minimum = 200px
+            maximum = 1fr
+
+
+        This is a very common responsive Grid pattern.
+        */
+
+        .responsive-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(200px, 1fr)
+                );
+
+            gap: 20px;
+
+            border: 3px solid black;
+        }
+
+
+        /*
+        ============================================================
+        12. AUTO-FILL vs AUTO-FIT
+        ============================================================
+
+        auto-fill:
+
+            Creates as many tracks as can fit.
+
+        auto-fit:
+
+            Creates as many tracks as can fit AND collapses
+            empty tracks.
+
+        For most responsive card layouts:
+
+            auto-fit
+
+        is commonly useful.
+        */
+
+
+        /*
+        ============================================================
+        13. JUSTIFY-ITEMS
+        ============================================================
+
+        Controls the horizontal alignment of CONTENT
+        INSIDE each grid cell.
+
+        Values:
+
+            start
+            center
+            end
+            stretch
+        */
+
+        .alignment-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            justify-items: center;
+
+            gap: 10px;
+
+            border: 3px solid black;
+        }
+
+
+        /*
+        ============================================================
+        14. ALIGN-ITEMS
+        ============================================================
+
+        Controls the vertical alignment of content
+        INSIDE each grid cell.
+
+        Values:
+
+            start
+            center
+            end
+            stretch
+        */
+
+        .alignment-grid-2 {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            align-items: center;
+
+            height: 200px;
+
+            gap: 10px;
+
+            border: 3px solid black;
+        }
+
+
+        /*
+        ============================================================
+        15. PLACE-ITEMS
+        ============================================================
+
+        Shorthand for:
+
+            align-items
+            justify-items
+
+        Example:
+
+            place-items: center;
+
+        centers content both horizontally and vertically.
+        */
+
+        .center-grid {
+            display: grid;
+
+            place-items: center;
+
+            height: 200px;
+
+            border: 3px solid black;
+        }
+
+
+        /*
+        ============================================================
+        16. GRID TEMPLATE AREAS
+        ============================================================
+
+        One of the most powerful Grid features.
+
+        We can give areas names.
+
+            "header header header"
+            "sidebar main   main"
+            "footer footer footer"
+
+
+        This visually represents the layout.
+
+                HEADER
+            ┌───────────────┐
+            │               │
+            ├──────┬────────┤
+            │      │        │
+            │ SIDE │  MAIN  │
+            │ BAR  │        │
+            ├──────┴────────┤
+            │     FOOTER    │
+            └───────────────┘
+        */
+
+        .page-layout {
+            display: grid;
+
+            grid-template-columns: 200px 1fr;
+
+            grid-template-rows: auto 1fr auto;
+
+            grid-template-areas:
+                "header header"
+                "sidebar main"
+                "footer footer";
+
+            min-height: 400px;
+
+            border: 3px solid black;
+        }
+
+
+        .header {
+            grid-area: header;
+
+            padding: 20px;
+
+            background: lightblue;
+        }
+
+        .sidebar {
+            grid-area: sidebar;
+
+            padding: 20px;
+
+            background: lightgreen;
+        }
+
+        .main {
+            grid-area: main;
+
+            padding: 20px;
+
+            background: lightyellow;
+        }
+
+        .footer {
+            grid-area: footer;
+
+            padding: 20px;
+
+            background: lightgray;
+        }
+
+
+        /*
+        ============================================================
+        17. JUSTIFY-CONTENT
+        ============================================================
+
+        Controls the GRID itself along the inline/horizontal axis
+        when there is extra space in the grid container.
+
+        Common values:
+
+            start
+            center
+            end
+            space-between
+            space-around
+            space-evenly
+        */
+
+
+        /*
+        ============================================================
+        18. ALIGN-CONTENT
+        ============================================================
+
+        Controls the GRID itself along the block/vertical axis
+        when there is extra space.
+
+        IMPORTANT:
+
+            align-items
+                → content INSIDE cells
+
+            align-content
+                → the GRID TRACKS themselves
+        */
+
+
+        /*
+        ============================================================
+        19. IMPLICIT GRID
+        ============================================================
+
+        Sometimes we create fewer rows/columns than the number
+        of items requires.
+
+        CSS Grid automatically creates additional tracks.
+
+        These are called:
+
+            IMPLICIT GRID TRACKS.
+
+
+        We can control them using:
+
+            grid-auto-rows
+            grid-auto-columns
+            grid-auto-flow
+        */
+
+        .implicit-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            grid-auto-rows: 100px;
+
+            gap: 10px;
+
+            border: 3px solid black;
+        }
+
+
+        /*
+        ============================================================
+        20. GRID-AUTO-FLOW
+        ============================================================
+
+        Controls how automatically placed items are positioned.
+
+            row       → fill rows
+            column    → fill columns
+            dense     → try to fill available gaps
+
+        Example:
+
+            grid-auto-flow: dense;
+        */
+
+
+    </style>
+</head>
+
+
+<body>
+
+    <h1>CSS Grid</h1>
+
+
+    <!-- ============================================================
+         1. BASIC GRID
+         ============================================================ -->
+
+    <h2>1. Basic Grid</h2>
+
+    <div class="basic-grid">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+
+    </div>
+
+
+    <!-- ============================================================
+         2. DIFFERENT COLUMN SIZES
+         ============================================================ -->
+
+    <h2>2. Different Column Sizes</h2>
+
+    <div class="different-columns">
+
+        <div class="item">200px</div>
+        <div class="item">1fr</div>
+        <div class="item">2fr</div>
+
+    </div>
+
+
+    <!-- ============================================================
+         3. ROWS
+         ============================================================ -->
+
+    <h2>3. Grid Rows</h2>
+
+    <div class="rows-grid">
+
+        <div class="item">Row 1</div>
+        <div class="item">Row 1</div>
+
+        <div class="item">Row 2</div>
+        <div class="item">Row 2</div>
+
+    </div>
+
+
+    <!-- ============================================================
+         4. REPEAT()
+         ============================================================ -->
+
+    <h2>4. repeat()</h2>
+
+    <div class="repeat-grid">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+
+    </div>
+
+
+    <!-- ============================================================
+         5. GAP
+         ============================================================ -->
+
+    <h2>5. Gap</h2>
+
+    <div class="gap-grid">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+
+    </div>
+
+
+    <!-- ============================================================
+         6. COLUMN SPAN
+         ============================================================ -->
+
+    <h2>6. Column Spanning</h2>
+
+    <div class="span-grid">
+
+        <!-- Occupies column 1 and column 2 -->
+        <div class="item span-two-columns">
+            Spans 2 Columns
+        </div>
+
+        <div class="item">
+            3
+        </div>
+
+        <div class="item">
+            4
+        </div>
+
+        <div class="item">
+            5
+        </div>
+
+    </div>
+
+
+    <!-- ============================================================
+         7. ROW SPAN
+         ============================================================ -->
+
+    <h2>7. Row Spanning</h2>
+
+    <div class="row-span-grid">
+
+        <!-- Occupies two rows -->
+        <div class="item span-two-rows">
+            Spans 2 Rows
+        </div>
+
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+        <div class="item">4</div>
+
+    </div>
+
+
+    <!-- ============================================================
+         8. RESPONSIVE GRID
+         ============================================================ -->
+
+    <h2>8. Responsive Grid</h2>
+
+    <div class="responsive-grid">
+
+        <div class="item">Card 1</div>
+        <div class="item">Card 2</div>
+        <div class="item">Card 3</div>
+        <div class="item">Card 4</div>
+        <div class="item">Card 5</div>
+        <div class="item">Card 6</div>
+
+    </div>
+
+
+    <!-- ============================================================
+         9. CENTERING
+         ============================================================ -->
+
+    <h2>9. Centering with Grid</h2>
+
+    <div class="center-grid">
+
+        <div class="item">
+            Perfectly Centered
+        </div>
+
+    </div>
+
+
+    <!-- ============================================================
+         10. GRID TEMPLATE AREAS
+         ============================================================ -->
+
+    <h2>10. Grid Template Areas</h2>
+
+    <div class="page-layout">
+
+        <header class="header">
+            Header
+        </header>
+
+        <aside class="sidebar">
+            Sidebar
+        </aside>
+
+        <main class="main">
+            Main Content
+        </main>
+
+        <footer class="footer">
+            Footer
+        </footer>
+
+    </div>
+
+
+    <!-- ============================================================
+         11. IMPLICIT GRID
+         ============================================================ -->
+
+    <h2>11. Implicit Grid</h2>
+
+    <div class="implicit-grid">
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+
+    </div>
+
+
+    <!--
+    ================================================================
+    CSS GRID — QUICK REVISION
+    ================================================================
+
+
+    GRID
+    ----
+
+    Two-dimensional layout system.
+
+        Rows + Columns
+
+
+    ================================================================
+    GRID CONTAINER
+    ================================================================
+
+        display: grid;
+
+
+    ================================================================
+    COLUMNS
+    ================================================================
+
+        grid-template-columns
+
+
+    Example:
+
+        grid-template-columns: 1fr 2fr;
+
+
+    ================================================================
+    ROWS
+    ================================================================
+
+        grid-template-rows
+
+
+    ================================================================
+    fr
+    ================================================================
+
+    fr = fraction of available space.
+
+
+        1fr 1fr
+
+    → Equal columns.
+
+
+        1fr 2fr
+
+    → Second column gets twice as much available space.
+
+
+    ================================================================
+    repeat()
+    ================================================================
+
+        repeat(3, 1fr)
+
+    =
+
+        1fr 1fr 1fr
+
+
+    ================================================================
+    GAP
+    ================================================================
+
+        gap: 20px;
+
+    Space between grid items.
+
+
+        row-gap
+        column-gap
+
+
+    ================================================================
+    SPANNING
+    ================================================================
+
+        grid-column: 1 / 3;
+
+    → Occupies columns 1 and 2.
+
+
+        grid-column: span 2;
+
+    → Occupies 2 columns.
+
+
+        grid-row: 1 / 3;
+
+    → Occupies rows 1 and 2.
+
+
+    ================================================================
+    RESPONSIVE GRID
+    ================================================================
+
+    One of the most useful patterns:
+
+        grid-template-columns:
+            repeat(auto-fit, minmax(200px, 1fr));
+
+
+    Meaning:
+
+        "Create as many columns as can fit,
+         but never make a column smaller than 200px."
+
+
+    ================================================================
+    ALIGNMENT
+    ================================================================
+
+        justify-items
+            → content inside cells horizontally
+
+        align-items
+            → content inside cells vertically
+
+        place-items
+            → shorthand for both
+
+
+        justify-content
+            → positions the GRID horizontally
+
+        align-content
+            → positions the GRID vertically
+
+
+    ================================================================
+    GRID TEMPLATE AREAS
+    ================================================================
+
+        grid-template-areas
+
+    Allows us to describe a layout visually.
+
+
+        "header header"
+        "sidebar main"
+        "footer footer"
+
+
+    Then:
+
+        grid-area: header;
+        grid-area: sidebar;
+        grid-area: main;
+        grid-area: footer;
+
+
+    ================================================================
+    IMPORTANT GRID CONCEPTS
+    ================================================================
+
+        Grid Container
+        Grid Items
+        Grid Lines
+        Grid Tracks
+        Grid Cells
+        Grid Areas
+
+
+    Grid Line:
+
+        The numbered lines separating rows/columns.
+
+
+    Grid Track:
+
+        A complete row OR column.
+
+
+    Grid Cell:
+
+        A single intersection of one row and one column.
+
+
+    Grid Area:
+
+        One or more grid cells.
+
+
+    ================================================================
+    FLEXBOX vs GRID
+    ================================================================
+
+        FLEXBOX
+        -------
+        One-dimensional
+
+        Best for:
+            Navbar
+            Toolbar
+            Buttons
+            Component-level alignment
+            Row/column layouts
+
+
+        GRID
+        ----
+        Two-dimensional
+
+        Best for:
+            Page layouts
+            Dashboards
+            Card grids
+            Galleries
+            Complex layouts
+
+
+    They are NOT competitors.
+
+    Real-world applications commonly use:
+
+        Grid → page-level layout
+        Flexbox → component-level layout
+
+
+    ================================================================
+    INTERVIEW MENTAL MODEL
+    ================================================================
+
+    Flexbox asks:
+
+        "How do I arrange these items along one axis?"
+
+
+    Grid asks:
+
+        "How do I control rows AND columns?"
+
+
+    ================================================================
+    MOST IMPORTANT PROPERTIES TO MASTER
+    ================================================================
+
+        display: grid
+
+        grid-template-columns
+        grid-template-rows
+
+        gap
+
+        grid-column
+        grid-row
+
+        grid-template-areas
+        grid-area
+
+        repeat()
+        minmax()
+        auto-fit
+        auto-fill
+
+        fr
+
+        justify-items
+        align-items
+        place-items
+
+        justify-content
+        align-content
+
+        grid-auto-rows
+        grid-auto-columns
+        grid-auto-flow
+
+
+    ================================================================
+    ================================================================
+    -->
+</body>
+</html>

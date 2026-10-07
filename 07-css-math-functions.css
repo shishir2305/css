@@ -1,0 +1,24 @@
+/* 1. calc()
+   Performs basic calculations. */
+width: calc(100% - 40px);
+
+
+/* 2. min()
+   Uses the smallest value. */
+width: min(100%, 500px);
+
+
+/* 3. max()
+   Uses the largest value. */
+width: max(300px, 50%);
+
+
+/* 4. clamp()
+   Keeps a value between a minimum and maximum. */
+font-size: clamp(1rem, 2vw, 2rem);
+
+
+/* 5. minmax()
+   Commonly used with CSS Grid.
+   Sets a minimum and maximum size. */
+grid-template-columns: minmax(200px, 1fr);

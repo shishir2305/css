@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Backgrounds, Gradients & Images</title>
+
+    <style>
+
+        /* =====================================================
+           1. BACKGROUND COLOR
+           =====================================================
+
+           background-color sets the background color of an element.
+        */
+
+        .background-color {
+            background-color: lightblue;
+            padding: 30px;
+        }
+
+
+        /* =====================================================
+           2. BACKGROUND IMAGE
+           =====================================================
+
+           background-image places an image behind the content.
+
+           url() points to the image location.
+        */
+
+        .background-image {
+            height: 250px;
+
+            background-image: url("https://picsum.photos/800/400");
+
+            /*
+                Controls how the image is repeated.
+            */
+            background-repeat: no-repeat;
+
+            /*
+                Makes the image cover the entire element.
+                Some parts may be cropped.
+            */
+            background-size: cover;
+
+            /*
+                Centers the image inside the element.
+            */
+            background-position: center;
+        }
+
+
+        /* =====================================================
+           3. BACKGROUND SIZE
+           ===================================================== */
+
+        .background-cover {
+            background-image: url("https://picsum.photos/800/400");
+
+            /*
+                cover:
+                Entire container is covered.
+                Image may be cropped.
+            */
+            background-size: cover;
+        }
+
+        .background-contain {
+            background-image: url("https://picsum.photos/800/400");
+
+            /*
+                contain:
+                Entire image remains visible.
+                Empty space may appear.
+            */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+
+        /* =====================================================
+           4. BACKGROUND POSITION
+           ===================================================== */
+
+        .background-position {
+            height: 250px;
+
+            background-image: url("https://picsum.photos/800/400");
+            background-size: cover;
+
+            /*
+                Common values:
+
+                center
+                top
+                bottom
+                left
+                right
+
+                You can also use percentages or lengths.
+            */
+            background-position: center;
+        }
+
+
+        /* =====================================================
+           5. BACKGROUND REPEAT
+           ===================================================== */
+
+        .background-repeat {
+            height: 200px;
+
+            background-image: url("https://picsum.photos/100/100");
+
+            /*
+                repeat       → repeats both directions
+                repeat-x     → horizontal
+                repeat-y     → vertical
+                no-repeat    → no repetition
+            */
+            background-repeat: repeat;
+        }
+
+
+        /* =====================================================
+           6. BACKGROUND SHORTHAND
+           =====================================================
+
+           Multiple background properties can be written together.
+        */
+
+        .background-shorthand {
+            height: 250px;
+
+            background:
+                url("https://picsum.photos/800/400")
+                center / cover
+                no-repeat;
+        }
+
+
+        /* =====================================================
+           7. LINEAR GRADIENT
+           =====================================================
+
+           A gradient generates an image by smoothly transitioning
+           between colors.
+
+           It does NOT require an actual image file.
+        */
+
+        .linear-gradient {
+            height: 200px;
+
+            background:
+                linear-gradient(
+                    to right,
+                    #ff6b6b,
+                    #4dabf7
+                );
+        }
+
+
+        /* =====================================================
+           8. LINEAR GRADIENT DIRECTION
+           ===================================================== */
+
+        .gradient-direction {
+            height: 200px;
+
+            /*
+                Other examples:
+
+                to right
+                to left
+                to bottom
+                45deg
+                135deg
+            */
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #667eea,
+                    #764ba2
+                );
+        }
+
+
+        /* =====================================================
+           9. RADIAL GRADIENT
+           =====================================================
+
+           Creates a gradient spreading outward from a center point.
+        */
+
+        .radial-gradient {
+            height: 200px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #ffffff,
+                    #4dabf7
+                );
+        }
+
+
+        /* =====================================================
+           10. CONIC GRADIENT
+           =====================================================
+
+           Colors rotate around a center point.
+
+           Useful for things like pie-chart-like visuals,
+           color wheels, etc.
+        */
+
+        .conic-gradient {
+            height: 200px;
+
+            background:
+                conic-gradient(
+                    #ff6b6b,
+                    #ffd43b,
+                    #51cf66,
+                    #339af0,
+                    #ff6b6b
+                );
+        }
+
+
+        /* =====================================================
+           11. GRADIENT OVER IMAGE
+           =====================================================
+
+           Multiple backgrounds are painted in layers.
+
+           The first background is on top.
+           The image is underneath it.
+        */
+
+        .gradient-overlay {
+            height: 300px;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.6),
+                    rgba(0, 0, 0, 0.2)
+                ),
+                url("https://picsum.photos/800/400");
+
+            background-size: cover;
+            background-position: center;
+
+            color: white;
+            padding: 30px;
+        }
+
+
+        /* =====================================================
+           12. MULTIPLE BACKGROUNDS
+           =====================================================
+
+           CSS allows multiple background images.
+
+           They are separated by commas.
+        */
+
+        .multiple-backgrounds {
+            height: 250px;
+
+            background:
+                url("https://picsum.photos/100/100"),
+                linear-gradient(
+                    135deg,
+                    #222,
+                    #777
+                );
+
+            /*
+                First background layer is painted above
+                the second layer.
+            */
+
+            background-repeat: no-repeat;
+            background-position: right bottom;
+        }
+
+
+        /* =====================================================
+           13. BACKGROUND ATTACHMENT
+           ===================================================== */
+
+        .background-attachment {
+            height: 300px;
+
+            background-image:
+                url("https://picsum.photos/1000/800");
+
+            background-size: cover;
+            background-position: center;
+
+            /*
+                scroll:
+                Background normally moves with the element.
+
+                fixed:
+                Background is fixed relative to the viewport.
+            */
+            background-attachment: fixed;
+        }
+
+
+        /* =====================================================
+           14. OBJECT-FIT
+           =====================================================
+
+           IMPORTANT:
+
+           background-size is used for CSS background images.
+
+           object-fit is used for actual <img>, <video>, etc.
+        */
+
+        .object-fit-image {
+            width: 300px;
+            height: 200px;
+
+            /*
+                cover:
+                Fills the box but may crop the image.
+            */
+            object-fit: cover;
+        }
+
+
+        /* =====================================================
+           15. OBJECT-POSITION
+           ===================================================== */
+
+        .object-position-image {
+            width: 300px;
+            height: 200px;
+
+            object-fit: cover;
+
+            /*
+                Controls which part of the image remains visible
+                when object-fit crops the image.
+            */
+            object-position: center;
+        }
+
+
+        /* =====================================================
+           16. IMAGE RESPONSIVENESS
+           =====================================================
+
+           Prevents images from overflowing their containers.
+        */
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+
+        /* =====================================================
+           17. IMAGE AS A DECORATION vs CONTENT
+           =====================================================
+
+           Use background-image when the image is decorative.
+
+           Use <img> when the image is actual content.
+
+           Example:
+
+           Decorative:
+               background-image: url(...);
+
+           Meaningful content:
+               <img src="..." alt="Description">
+        */
+
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Backgrounds, Gradients & Images</h1>
+
+
+    <h2>1. Background Color</h2>
+
+    <div class="background-color">
+        Background color example.
+    </div>
+
+
+    <h2>2. Background Image</h2>
+
+    <div class="background-image">
+        Background image example.
+    </div>
+
+
+    <h2>3. Background Cover</h2>
+
+    <div
+        class="background-cover"
+        style="height: 200px;"
+    >
+    </div>
+
+
+    <h2>4. Background Contain</h2>
+
+    <div
+        class="background-contain"
+        style="height: 200px;"
+    >
+    </div>
+
+
+    <h2>5. Background Position</h2>
+
+    <div
+        class="background-position"
+    >
+    </div>
+
+
+    <h2>6. Background Repeat</h2>
+
+    <div
+        class="background-repeat"
+    >
+    </div>
+
+
+    <h2>7. Background Shorthand</h2>
+
+    <div
+        class="background-shorthand"
+    >
+    </div>
+
+
+    <h2>8. Linear Gradient</h2>
+
+    <div
+        class="linear-gradient"
+    >
+    </div>
+
+
+    <h2>9. Gradient Direction</h2>
+
+    <div
+        class="gradient-direction"
+    >
+    </div>
+
+
+    <h2>10. Radial Gradient</h2>
+
+    <div
+        class="radial-gradient"
+    >
+    </div>
+
+
+    <h2>11. Conic Gradient</h2>
+
+    <div
+        class="conic-gradient"
+    >
+    </div>
+
+
+    <h2>12. Gradient Overlay</h2>
+
+    <div
+        class="gradient-overlay"
+    >
+        <h2>Text over an image</h2>
+
+        <p>
+            A gradient overlay improves text readability
+            over a background image.
+        </p>
+    </div>
+
+
+    <h2>13. Multiple Backgrounds</h2>
+
+    <div
+        class="multiple-backgrounds"
+    >
+    </div>
+
+
+    <h2>14. Object Fit</h2>
+
+    <!--
+        <img> is actual content.
+
+        alt is important for accessibility.
+    -->
+
+    <img
+        class="object-fit-image"
+        src="https://picsum.photos/800/500"
+        alt="Example landscape"
+    >
+
+
+    <h2>15. Object Position</h2>
+
+    <img
+        class="object-position-image"
+        src="https://picsum.photos/800/500"
+        alt="Example landscape"
+    >
+
+
+    <!-- =====================================================
+         QUICK REVISION
+         =====================================================
+
+         background-color
+         → Sets background color.
+
+         background-image
+         → Adds an image/gradient as a background.
+
+         background-size
+         → Controls background image size.
+
+         cover
+         → Fills container, may crop image.
+
+         contain
+         → Shows entire image, may leave empty space.
+
+         background-position
+         → Controls image position.
+
+         background-repeat
+         → Controls image repetition.
+
+         background-attachment
+         → Controls background scrolling behavior.
+
+         linear-gradient()
+         → Gradient along a line.
+
+         radial-gradient()
+         → Gradient spreading from a center.
+
+         conic-gradient()
+         → Gradient rotating around a center.
+
+         Multiple backgrounds
+         → Separate layers with commas.
+
+         object-fit
+         → Controls how <img>/<video> fits its box.
+
+         object-position
+         → Controls the visible position of an object-fit image.
+
+         IMPORTANT:
+         background-image ≠ <img>
+
+         Use background-image:
+         → Decorative images
+         → Hero backgrounds
+         → Text overlays
+
+         Use <img>:
+         → Meaningful/content images
+         → Images requiring alt text
+         → Images that are part of the document content
+
+         PERFORMANCE:
+         → Use optimized image formats such as WebP/AVIF.
+         → Compress large images.
+         → Use responsive images where appropriate.
+         → Avoid unnecessarily huge background images.
+         → Lazy-load non-critical content images.
+
+    -->
+
+</body>
+</html>

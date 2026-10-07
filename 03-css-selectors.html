@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CSS Selectors</title>
+
+  <style>
+
+    /* 1. Universal Selector
+       Selects every element. */
+    * {
+      box-sizing: border-box;
+    }
+
+
+    /* 2. Element Selector
+       Selects elements by their tag name. */
+    p {
+      color: gray;
+    }
+
+
+    /* 3. Class Selector
+       Selects elements with the given class. */
+    .title {
+      color: blue;
+    }
+
+
+    /* 4. ID Selector
+       Selects an element using its ID. */
+    #heading {
+      font-size: 30px;
+    }
+
+
+    /* 5. Attribute Selector
+       Selects elements based on an attribute. */
+    input[type="text"] {
+      border: 2px solid blue;
+    }
+
+
+    /* 6. Descendant Selector
+       Selects elements anywhere inside another element. */
+    .card p {
+      color: green;
+    }
+
+
+    /* 7. Child Selector
+       Selects only direct children. */
+    .card > p {
+      font-weight: bold;
+    }
+
+
+    /* 8. Adjacent Sibling Selector
+       Selects the element immediately after another element. */
+    h2 + p {
+      color: red;
+    }
+
+
+    /* 9. General Sibling Selector
+       Selects matching siblings appearing after an element. */
+    h2 ~ div {
+      background: lightgray;
+    }
+
+
+    /* 10. Grouping Selector
+        Applies the same styles to multiple selectors. */
+    h3, h4 {
+      font-family: Arial;
+    }
+
+
+    /* 11. Pseudo-Class
+        Selects an element based on its state. */
+    button:hover {
+      background: black;
+      color: white;
+    }
+
+
+    /* 12. Pseudo-Element
+        Selects a specific part of an element. */
+    .description::first-letter {
+      font-size: 30px;
+    }
+
+
+    /* 13. :not()
+        Selects elements that don't match the condition. */
+    .list p:not(.special) {
+      color: orange;
+    }
+
+
+    /* 14. :is()
+        Selects any element matching the selectors inside it. */
+    :is(h5, h6) {
+      color: purple;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1 id="heading" class="title">
+    CSS Selectors
+  </h1>
+
+  <p>Element selector</p>
+
+  <div class="card">
+    <p>Direct child</p>
+
+    <div>
+      <p>Descendant but not direct child</p>
+    </div>
+  </div>
+
+  <h2>Heading</h2>
+  <p>Adjacent sibling</p>
+
+  <div>General sibling</div>
+  <div>Another general sibling</div>
+
+  <input type="text" placeholder="Text input">
+
+  <button>Hover me</button>
+
+  <p class="description">
+    Pseudo-element example
+  </p>
+
+  <div class="list">
+    <p>Normal paragraph</p>
+    <p class="special">Special paragraph</p>
+  </div>
+
+  <h5>Heading 5</h5>
+  <h6>Heading 6</h6>
+
+</body>
+</html>

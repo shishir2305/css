@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Animations & Keyframes</title>
+
+    <style>
+
+        /* =====================================================
+           1. BASIC ANIMATION
+           =====================================================
+
+           Animation = automatic change of CSS properties
+           over time.
+
+           @keyframes defines WHAT happens.
+
+           animation defines HOW it runs.
+        */
+
+        @keyframes move {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(300px);
+            }
+        }
+
+        .basic {
+            width: 100px;
+            height: 100px;
+            background: steelblue;
+
+            /*
+                animation-name: move
+                animation-duration: 2s
+            */
+            animation: move 2s;
+        }
+
+
+        /* =====================================================
+           2. KEYFRAME PERCENTAGES
+           =====================================================
+
+           You can define multiple stages.
+
+           0%   → beginning
+           50%  → middle
+           100% → end
+        */
+
+        @keyframes colorChange {
+
+            0% {
+                background: red;
+                transform: translateX(0);
+            }
+
+            50% {
+                background: orange;
+                transform: translateX(150px);
+            }
+
+            100% {
+                background: green;
+                transform: translateX(300px);
+            }
+        }
+
+        .stages {
+            width: 100px;
+            height: 100px;
+
+            animation:
+                colorChange 3s;
+        }
+
+
+        /* =====================================================
+           3. ANIMATION DURATION
+           ===================================================== */
+
+        @keyframes scaleUp {
+
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.5);
+            }
+        }
+
+        .duration {
+            width: 100px;
+            height: 100px;
+            background: purple;
+
+            animation:
+                scaleUp 3s;
+        }
+
+
+        /* =====================================================
+           4. TIMING FUNCTION
+           =====================================================
+
+           Controls the speed curve.
+
+           Common values:
+
+           ease
+           ease-in
+           ease-out
+           ease-in-out
+           linear
+           cubic-bezier()
+        */
+
+        @keyframes slide {
+
+            to {
+                transform: translateX(300px);
+            }
+        }
+
+        .timing {
+            width: 100px;
+            height: 100px;
+            background: green;
+
+            animation:
+                slide 2s ease-in-out;
+        }
+
+
+        /* =====================================================
+           5. ANIMATION DELAY
+           ===================================================== */
+
+        .delay {
+            width: 100px;
+            height: 100px;
+            background: orange;
+
+            /*
+                Wait 1 second before starting.
+            */
+            animation:
+                slide 2s ease 1s;
+        }
+
+
+        /* =====================================================
+           6. ANIMATION ITERATION COUNT
+           =====================================================
+
+           Controls how many times animation runs.
+
+           1
+           2
+           3
+           infinite
+        */
+
+        @keyframes pulse {
+
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .infinite {
+            width: 100px;
+            height: 100px;
+            background: crimson;
+
+            animation:
+                pulse 1s ease-in-out infinite;
+        }
+
+
+        /* =====================================================
+           7. ANIMATION DIRECTION
+           =====================================================
+
+           normal
+           reverse
+           alternate
+           alternate-reverse
+        */
+
+        .alternate {
+            width: 100px;
+            height: 100px;
+            background: dodgerblue;
+
+            animation:
+                slide 2s ease-in-out infinite alternate;
+        }
+
+
+        /* =====================================================
+           8. ANIMATION FILL MODE
+           =====================================================
+
+           Controls styles before/after animation.
+
+           forwards:
+           Keeps final keyframe after animation ends.
+
+           backwards:
+           Applies first keyframe during delay.
+
+           both:
+           Applies both behaviors.
+        */
+
+        .fill-mode {
+            width: 100px;
+            height: 100px;
+            background: teal;
+
+            animation:
+                slide 2s forwards;
+        }
+
+
+        /* =====================================================
+           9. ANIMATION PLAY STATE
+           =====================================================
+
+           running → animation plays
+           paused  → animation stops at current position
+        */
+
+        .play-state {
+            width: 100px;
+            height: 100px;
+            background: tomato;
+
+            animation:
+                pulse 1s infinite;
+        }
+
+        .play-state:hover {
+            animation-play-state: paused;
+        }
+
+
+        /* =====================================================
+           10. MULTIPLE ANIMATIONS
+           =====================================================
+
+           Multiple animations can run on one element.
+
+           Separate them with commas.
+        */
+
+        @keyframes rotate {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.3;
+            }
+        }
+
+        .multiple {
+            width: 100px;
+            height: 100px;
+            background: blue;
+
+            animation:
+                rotate 2s linear infinite,
+                fade 2s ease-in-out infinite;
+        }
+
+
+        /* =====================================================
+           11. REAL-WORLD LOADING SPINNER
+           ===================================================== */
+
+        @keyframes spin {
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+
+            border: 5px solid #ddd;
+            border-top-color: #333;
+
+            border-radius: 50%;
+
+            animation:
+                spin 1s linear infinite;
+        }
+
+
+        /* =====================================================
+           12. PERFORMANCE
+           =====================================================
+
+           Prefer animating:
+
+               transform
+               opacity
+
+           These properties can often be handled efficiently
+           by the browser's compositing pipeline.
+
+           Avoid unnecessary animations of layout properties
+           such as:
+
+               width
+               height
+               top
+               left
+
+           when transform can achieve the same effect.
+        */
+
+
+        /* =====================================================
+           13. REDUCED MOTION
+           =====================================================
+
+           Accessibility:
+
+           Some users prefer less motion.
+        */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Animations & Keyframes</h1>
+
+
+    <h2>1. Basic Animation</h2>
+
+    <div class="basic"></div>
+
+
+    <h2>2. Multiple Keyframe Stages</h2>
+
+    <div class="stages"></div>
+
+
+    <h2>3. Animation Duration</h2>
+
+    <div class="duration"></div>
+
+
+    <h2>4. Timing Function</h2>
+
+    <div class="timing"></div>
+
+
+    <h2>5. Animation Delay</h2>
+
+    <div class="delay"></div>
+
+
+    <h2>6. Infinite Animation</h2>
+
+    <div class="infinite"></div>
+
+
+    <h2>7. Alternate Direction</h2>
+
+    <div class="alternate"></div>
+
+
+    <h2>8. Fill Mode</h2>
+
+    <div class="fill-mode"></div>
+
+
+    <h2>9. Play State</h2>
+
+    <p>
+        Hover over the box to pause the animation.
+    </p>
+
+    <div class="play-state"></div>
+
+
+    <h2>10. Multiple Animations</h2>
+
+    <div class="multiple"></div>
+
+
+    <h2>11. Loading Spinner</h2>
+
+    <div class="spinner"></div>
+
+
+    <!-- =====================================================
+         QUICK REVISION
+         =====================================================
+
+         CSS ANIMATION
+         --------------
+
+         Animation allows CSS properties to change automatically
+         over time.
+
+         @keyframes
+         → Defines the stages of the animation.
+
+         animation
+         → Controls how the animation runs.
+
+
+         BASIC:
+
+             @keyframes move {
+                 from {
+                     transform: translateX(0);
+                 }
+
+                 to {
+                     transform: translateX(300px);
+                 }
+             }
+
+             .box {
+                 animation: move 2s;
+             }
+
+
+         KEYFRAME VALUES
+         ---------------
+
+             from / to
+
+         OR:
+
+             0%
+             25%
+             50%
+             75%
+             100%
+
+
+         IMPORTANT PROPERTIES
+         --------------------
+
+         animation-name
+         → Which @keyframes to use.
+
+         animation-duration
+         → How long it takes.
+
+         animation-timing-function
+         → Controls speed curve.
+
+         animation-delay
+         → Delay before starting.
+
+         animation-iteration-count
+         → Number of repetitions.
+
+         animation-direction
+         → Controls playback direction.
+
+         animation-fill-mode
+         → Controls styles before/after animation.
+
+         animation-play-state
+         → running / paused.
+
+
+         DIRECTION
+         ---------
+
+         normal
+         → Forward.
+
+         reverse
+         → Backward.
+
+         alternate
+         → Forward, then backward.
+
+         alternate-reverse
+         → Backward, then forward.
+
+
+         FILL MODE
+         ---------
+
+         none
+         → Normal behavior.
+
+         forwards
+         → Keeps final keyframe.
+
+         backwards
+         → Applies starting keyframe during delay.
+
+         both
+         → Forwards + backwards.
+
+
+         TRANSITION vs ANIMATION
+         -----------------------
+
+         Transition:
+         → Usually triggered by a state change.
+         → Example: :hover.
+
+         Animation:
+         → Can start automatically.
+         → Uses @keyframes.
+         → Can repeat.
+         → Can have multiple stages.
+
+
+         PERFORMANCE
+         -----------
+
+         Prefer:
+
+             transform
+             opacity
+
+         Avoid unnecessarily animating:
+
+             width
+             height
+             top
+             left
+
+
+         ACCESSIBILITY
+         --------------
+
+         Respect:
+
+             prefers-reduced-motion: reduce
+
+
+         KEY INTERVIEW POINT
+         -------------------
+
+         "@keyframes defines the intermediate states of an
+         animation, while animation properties control how
+         those states are played over time."
+
+    -->
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ways to Apply CSS</title>
+
+  <!-- =================================================
+       1. INTERNAL CSS
+       =================================================
+       CSS is written inside the <style> tag.
+       
+       Pros:
+       - Easy to use for a single HTML page
+       - No separate CSS file required
+
+       Cons:
+       - Cannot be easily reused across multiple pages
+       - Makes HTML document larger
+       - Less maintainable for large projects
+  -->
+
+  <style>
+    .internal {
+      color: blue;
+    }
+  </style>
+
+
+  <!-- =================================================
+       2. EXTERNAL CSS
+       =================================================
+       CSS is written in a separate .css file.
+
+       Pros:
+       - Reusable across multiple HTML pages
+       - Keeps HTML and CSS separate
+       - Easier to maintain
+       - Browser can cache the CSS file
+
+       Cons:
+       - Requires an additional HTTP request
+         (although modern browsers can cache it)
+       - Requires managing another file
+  -->
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <!-- =================================================
+       3. INLINE CSS
+       =================================================
+       CSS is written directly inside the style attribute.
+
+       Pros:
+       - Quick and simple for small changes
+       - Highest specificity among these common methods
+
+       Cons:
+       - Difficult to maintain
+       - Cannot be easily reused
+       - Makes HTML harder to read
+       - Mixes structure with styling
+  -->
+
+  <h1 style="color: red;">
+    Inline CSS
+  </h1>
+
+
+  <!-- Internal CSS -->
+  <h2 class="internal">
+    Internal CSS
+  </h2>
+
+
+  <!-- External CSS -->
+  <p class="external">
+    External CSS
+  </p>
+
+</body>
+</html>

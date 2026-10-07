@@ -1,0 +1,946 @@
+Below is a single HTML file you can keep as your **Flexbox notes + practical reference**. The comments explain the important concepts directly inside the document.
+
+### `css-flexbox.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CSS Flexbox</title>
+
+    <style>
+
+        /*
+        ============================================================
+        CSS FLEXBOX
+        ============================================================
+
+        Flexbox is a CSS layout system used to arrange elements
+        in ONE dimension.
+
+        "One dimension" means we primarily work along either:
+
+            → Row
+        OR
+            ↓ Column
+
+
+        Example:
+
+            Row:
+
+            [ Box 1 ] [ Box 2 ] [ Box 3 ]
+
+
+            Column:
+
+            [ Box 1 ]
+            [ Box 2 ]
+            [ Box 3 ]
+
+
+        Flexbox has TWO important sides:
+
+            1. Flex Container
+            2. Flex Items
+
+
+        The parent becomes the FLEX CONTAINER.
+
+            .container {
+                display: flex;
+            }
+
+
+        Its direct children become FLEX ITEMS.
+
+
+        ============================================================
+        FLEX AXES
+        ============================================================
+
+        Flexbox has two axes:
+
+            MAIN AXIS
+            CROSS AXIS
+
+
+        With:
+
+            flex-direction: row;
+
+        Main axis:
+
+            ─────────────────────→
+
+        Cross axis:
+
+            │
+            │
+            ↓
+
+
+        With:
+
+            flex-direction: column;
+
+        Main axis:
+
+            │
+            │
+            ↓
+
+        Cross axis:
+
+            ─────────────────────→
+
+
+        IMPORTANT:
+
+        justify-content works on the MAIN AXIS.
+
+        align-items works on the CROSS AXIS.
+        */
+
+
+        /*
+        ============================================================
+        FLEX CONTAINER
+        ============================================================
+
+        display: flex;
+
+        turns the element into a flex container.
+
+        Its DIRECT CHILDREN become flex items.
+        */
+
+        .container {
+            display: flex;
+
+            /*
+            --------------------------------------------------------
+            flex-direction
+            --------------------------------------------------------
+
+            Controls the direction of the MAIN AXIS.
+
+            row       → left to right
+            row-reverse
+            column    → top to bottom
+            column-reverse
+            */
+
+            flex-direction: row;
+
+
+            /*
+            --------------------------------------------------------
+            justify-content
+            --------------------------------------------------------
+
+            Controls how items are distributed along the
+            MAIN AXIS.
+
+            Common values:
+
+                flex-start
+                center
+                flex-end
+                space-between
+                space-around
+                space-evenly
+            */
+
+            justify-content: center;
+
+
+            /*
+            --------------------------------------------------------
+            align-items
+            --------------------------------------------------------
+
+            Controls alignment along the CROSS AXIS.
+
+            Common values:
+
+                stretch
+                flex-start
+                center
+                flex-end
+                baseline
+            */
+
+            align-items: center;
+
+
+            /*
+            --------------------------------------------------------
+            gap
+            --------------------------------------------------------
+
+            Creates space BETWEEN flex items.
+
+            Unlike margin, gap is specifically designed for
+            spacing between items.
+            */
+
+            gap: 20px;
+
+
+            /*
+            Container height is added here so that the effect
+            of align-items becomes visible.
+            */
+
+            height: 250px;
+
+            border: 3px solid black;
+            padding: 20px;
+        }
+
+
+        /*
+        ============================================================
+        FLEX ITEMS
+        ============================================================
+
+        These are the direct children of .container.
+        */
+
+        .item {
+            width: 100px;
+            height: 80px;
+
+            background-color: steelblue;
+            color: white;
+
+            display: flex;
+
+            /*
+            These properties are being used on the ITEM itself
+            to center its own text.
+            */
+
+            justify-content: center;
+            align-items: center;
+
+            font-size: 18px;
+        }
+
+
+        /*
+        ============================================================
+        FLEX-WRAP
+        ============================================================
+
+        By default:
+
+            flex-wrap: nowrap;
+
+        This means items try to remain on ONE line.
+
+        With:
+
+            flex-wrap: wrap;
+
+        Items move to the next line when there is not enough
+        available space.
+        */
+
+        .wrap-container {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            width: 350px;
+
+            border: 3px solid black;
+            padding: 10px;
+        }
+
+
+        .wrap-item {
+            width: 100px;
+            height: 70px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: darkorange;
+            color: white;
+        }
+
+
+        /*
+        ============================================================
+        FLEX: GROW
+        ============================================================
+
+        flex-grow determines how an item uses EXTRA available
+        space.
+
+        Example:
+
+            item 1 → flex-grow: 1
+            item 2 → flex-grow: 2
+
+        Item 2 receives TWICE as much extra space as item 1.
+        */
+
+        .grow-container {
+            display: flex;
+
+            width: 500px;
+
+            border: 3px solid black;
+        }
+
+        .grow-1 {
+            flex-grow: 1;
+
+            padding: 20px;
+            background: lightblue;
+        }
+
+        .grow-2 {
+            flex-grow: 2;
+
+            padding: 20px;
+            background: lightgreen;
+        }
+
+
+        /*
+        ============================================================
+        FLEX: SHRINK
+        ============================================================
+
+        flex-shrink determines how much an item is allowed
+        to shrink when there is NOT enough space.
+
+        Default:
+
+            flex-shrink: 1;
+
+        Setting:
+
+            flex-shrink: 0;
+
+        prevents the item from shrinking.
+        */
+
+        .shrink-container {
+            display: flex;
+
+            width: 300px;
+
+            border: 3px solid black;
+        }
+
+        .no-shrink {
+            flex-shrink: 0;
+
+            width: 200px;
+            padding: 20px;
+
+            background: lightcoral;
+        }
+
+        .shrink-item {
+            width: 200px;
+            padding: 20px;
+
+            background: lightblue;
+        }
+
+
+        /*
+        ============================================================
+        FLEX-BASIS
+        ============================================================
+
+        flex-basis defines the INITIAL size of an item along
+        the MAIN AXIS.
+
+        For a row:
+
+            flex-basis → initial width
+
+        For a column:
+
+            flex-basis → initial height
+        */
+
+        .basis-container {
+            display: flex;
+
+            border: 3px solid black;
+        }
+
+        .basis-item {
+            flex-basis: 200px;
+
+            padding: 20px;
+
+            background: plum;
+        }
+
+
+        /*
+        ============================================================
+        FLEX SHORTHAND
+        ============================================================
+
+        flex is shorthand for:
+
+            flex-grow
+            flex-shrink
+            flex-basis
+
+
+        Example:
+
+            flex: 1;
+
+        is commonly used to make items share available space.
+
+        More explicit:
+
+            flex: 1 1 200px;
+
+        means:
+
+            grow   = 1
+            shrink = 1
+            basis  = 200px
+        */
+
+        .equal-container {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .equal-item {
+            flex: 1;
+
+            padding: 30px;
+
+            background: lightseagreen;
+        }
+
+
+        /*
+        ============================================================
+        ALIGN-SELF
+        ============================================================
+
+        align-items controls ALL flex items.
+
+        align-self allows ONE particular item to override
+        that alignment.
+        */
+
+        .align-container {
+            display: flex;
+
+            align-items: center;
+
+            height: 200px;
+
+            border: 3px solid black;
+        }
+
+        .align-item {
+            padding: 30px;
+
+            background: lightgray;
+        }
+
+        .special-item {
+            align-self: flex-start;
+
+            padding: 30px;
+
+            background: tomato;
+        }
+
+
+        /*
+        ============================================================
+        ORDER
+        ============================================================
+
+        order changes the visual order of flex items.
+
+        Default:
+
+            order: 0;
+
+        Smaller order values appear first.
+
+        IMPORTANT:
+
+        Visual order can differ from DOM order.
+
+        Do NOT use order carelessly because it can create
+        accessibility/usability problems for keyboard users
+        and screen readers.
+        */
+
+        .order-container {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .order-item {
+            padding: 20px;
+
+            background: lightyellow;
+
+            border: 1px solid black;
+        }
+
+        .order-first {
+            order: -1;
+        }
+
+
+        /*
+        ============================================================
+        NESTED FLEXBOX
+        ============================================================
+
+        A flex item can itself become a flex container.
+
+        This is extremely common in real applications.
+
+        Example:
+
+            Page
+              ↓
+            Navbar (flex container)
+              ↓
+            Logo + Menu + Buttons (flex items)
+        */
+
+        .navbar {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 15px;
+
+            background: #222;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+
+            gap: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>CSS Flexbox</h1>
+
+
+    <!--
+    ================================================================
+    1. BASIC FLEXBOX
+    ================================================================
+    -->
+
+    <h2>1. Basic Flexbox</h2>
+
+    <div class="container">
+
+        <!-- These are FLEX ITEMS because they are direct children. -->
+
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+
+    </div>
+
+
+    <!--
+    ================================================================
+    2. FLEX-WRAP
+    ================================================================
+    -->
+
+    <h2>2. Flex Wrap</h2>
+
+    <div class="wrap-container">
+
+        <div class="wrap-item">1</div>
+        <div class="wrap-item">2</div>
+        <div class="wrap-item">3</div>
+        <div class="wrap-item">4</div>
+        <div class="wrap-item">5</div>
+
+    </div>
+
+
+    <!--
+    ================================================================
+    3. FLEX-GROW
+    ================================================================
+    -->
+
+    <h2>3. Flex Grow</h2>
+
+    <div class="grow-container">
+
+        <!-- Gets 1 part of the available extra space -->
+        <div class="grow-1">
+            Grow 1
+        </div>
+
+        <!-- Gets 2 parts of the available extra space -->
+        <div class="grow-2">
+            Grow 2
+        </div>
+
+    </div>
+
+
+    <!--
+    ================================================================
+    4. FLEX-SHRINK
+    ================================================================
+    -->
+
+    <h2>4. Flex Shrink</h2>
+
+    <div class="shrink-container">
+
+        <!--
+        flex-shrink: 0
+
+        This item refuses to shrink below its base size.
+        -->
+
+        <div class="no-shrink">
+            No Shrink
+        </div>
+
+        <!--
+        This item is allowed to shrink.
+        -->
+
+        <div class="shrink-item">
+            Shrink
+        </div>
+
+    </div>
+
+
+    <!--
+    ================================================================
+    5. FLEX-BASIS
+    ================================================================
+    -->
+
+    <h2>5. Flex Basis</h2>
+
+    <div class="basis-container">
+
+        <!-- Initial main-axis size = 200px -->
+        <div class="basis-item">
+            Basis: 200px
+        </div>
+
+    </div>
+
+
+    <!--
+    ================================================================
+    6. FLEX: 1
+    ================================================================
+    -->
+
+    <h2>6. Equal Width Items</h2>
+
+    <div class="equal-container">
+
+        <!--
+        flex: 1 makes these items share available space.
+        -->
+
+        <div class="equal-item">Item 1</div>
+        <div class="equal-item">Item 2</div>
+        <div class="equal-item">Item 3</div>
+
+    </div>
+
+
+    <!--
+    ================================================================
+    7. ALIGN-SELF
+    ================================================================
+    -->
+
+    <h2>7. Align Self</h2>
+
+    <div class="align-container">
+
+        <div class="align-item">
+            Normal
+        </div>
+
+        <!--
+        This item overrides the parent's align-items value.
+        -->
+
+        <div class="special-item">
+            align-self
+        </div>
+
+    </div>
+
+
+    <!--
+    ================================================================
+    8. ORDER
+    ================================================================
+    -->
+
+    <h2>8. Order</h2>
+
+    <div class="order-container">
+
+        <div class="order-item">
+            DOM Item 1
+        </div>
+
+        <div class="order-item">
+            DOM Item 2
+        </div>
+
+        <!--
+        order: -1
+
+        This item appears before the other items visually.
+        -->
+
+        <div class="order-item order-first">
+            Visually First
+        </div>
+
+    </div>
+
+
+    <!--
+    ================================================================
+    9. NESTED FLEXBOX
+    ================================================================
+    -->
+
+    <h2>9. Real-World Example: Navbar</h2>
+
+    <nav class="navbar">
+
+        <strong>My Website</strong>
+
+        <!-- This is another flex container -->
+        <div class="nav-links">
+
+            <span>Home</span>
+            <span>About</span>
+            <span>Contact</span>
+
+        </div>
+
+    </nav>
+
+
+    <!--
+    ================================================================
+    FLEXBOX QUICK REVISION
+    ================================================================
+
+    FLEXBOX
+    -------
+    One-dimensional layout system.
+
+        display: flex;
+
+
+    MAIN AXIS
+    ---------
+    Direction controlled by:
+
+        flex-direction
+
+
+    CROSS AXIS
+    ----------
+    Perpendicular to the main axis.
+
+
+    ================================================================
+    IMPORTANT CONTAINER PROPERTIES
+    ================================================================
+
+    display
+        → Turns an element into a flex container.
+
+    flex-direction
+        → row / row-reverse / column / column-reverse
+
+    justify-content
+        → Alignment/distribution on MAIN AXIS.
+
+    align-items
+        → Alignment on CROSS AXIS.
+
+    flex-wrap
+        → Whether items can move onto multiple lines.
+
+    align-content
+        → Controls spacing/alignment of MULTIPLE flex lines.
+
+    gap
+        → Space between flex items.
+
+
+    ================================================================
+    IMPORTANT ITEM PROPERTIES
+    ================================================================
+
+    flex-grow
+        → How much extra space an item can receive.
+
+    flex-shrink
+        → How much an item can shrink.
+
+    flex-basis
+        → Initial size along the main axis.
+
+    flex
+        → Shorthand for grow + shrink + basis.
+
+    align-self
+        → Overrides align-items for one item.
+
+    order
+        → Changes visual ordering.
+
+
+    ================================================================
+    MOST IMPORTANT INTERVIEW CONCEPT
+    ================================================================
+
+    If:
+
+        flex-direction: row;
+
+    then:
+
+        MAIN AXIS  = horizontal
+        CROSS AXIS = vertical
+
+        justify-content → horizontal
+        align-items     → vertical
+
+
+    If:
+
+        flex-direction: column;
+
+    then:
+
+        MAIN AXIS  = vertical
+        CROSS AXIS = horizontal
+
+        justify-content → vertical
+        align-items     → horizontal
+
+
+    ================================================================
+    MENTAL MODEL
+    ================================================================
+
+    Remember:
+
+        justify-content → MAIN AXIS
+        align-items     → CROSS AXIS
+
+
+    And:
+
+        flex container
+              ↓
+        direct children
+              ↓
+        flex items
+
+
+    ================================================================
+    COMMON REAL-WORLD USES
+    ================================================================
+
+    Flexbox is commonly used for:
+
+        • Navigation bars
+        • Buttons
+        • Form layouts
+        • Cards
+        • Toolbars
+        • Header/footer layouts
+        • Centering content
+        • Horizontal/vertical alignment
+        • Distributing available space
+
+
+    ================================================================
+    FLEXBOX vs GRID
+    ================================================================
+
+    Flexbox:
+
+        → One-dimensional
+        → Row OR column
+        → Excellent for components and linear layouts
+
+
+    CSS Grid:
+
+        → Two-dimensional
+        → Rows AND columns
+        → Excellent for page-level layouts and complex grids
+
+
+    A real application commonly uses BOTH.
+
+
+    ================================================================
+    KEY TAKEAWAY
+    ================================================================
+
+    Flexbox is mainly about:
+
+        "How should these items be arranged
+         and how should available space be distributed?"
+
+
+    ================================================================
+    -->
+</body>
+</html>
+```
